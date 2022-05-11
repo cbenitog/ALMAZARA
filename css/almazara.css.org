@@ -1,0 +1,1333 @@
+
+html { 
+	height: 100%;
+	width: 100%;
+	background-color: #462c13;
+}
+
+body {
+	position: relative;
+	width: 100%;
+	min-height: 100%;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 12px;
+	color: #40362d;
+}
+
+.clear {
+	clear: both;
+}
+
+.center {
+	text-align: center;
+}
+
+.color_gris {
+	color: #939084;
+}
+
+.cursor:hover {
+	cursor: pointer;
+	cursor: hand;
+}
+
+.ease {
+   -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.font110 {
+	font-size: 110%;
+}
+
+.font120 {
+	font-size: 120%;
+}
+
+.hidden {
+	display: none;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.left {
+	float: left;
+}
+
+.no_valido {
+	border: 1px solid red !important;
+}
+
+.overflow {
+	overflow: hidden;
+}
+
+.red {
+	background-color: red;
+}
+
+.relative {
+	position: relative;
+}
+
+.right {
+	float: right;
+}
+
+
+.transition_no {
+	-webkit-transition: all 0s ease;
+    -moz-transition: all 0s ease;
+    -o-transition: all 0s ease;
+	transition: all 0 ease 0;
+}
+
+a a:visited {
+	color: #C09765;
+	font-weight: bold;
+}
+
+a.activo {
+	color: #c09765 !important;
+}
+
+a.todo {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+
+div.actividad {
+	width: 457px;
+	height: 72px;
+	background-color: #ddd2c2;
+	opacity: 0.9;
+	margin-bottom: 1px;
+}
+
+div.actividad_inner {
+	padding: 10px;
+}
+
+div.actividad_foto {
+	float: left;
+	width: 84px;
+	height: 48px;
+	border: 2px solid #735d47;
+	margin-right: 15px;
+	overflow: hidden; 
+}
+
+div.actividad_texto {
+	float: left;
+	color: #40362d;
+	font-size: 14px;
+	margin-top: 15px;
+	text-align: left;
+	max-width: 320px;	 
+}
+
+div#actividades_box {
+	margin: 0px auto;
+	width: 457px;
+}
+
+	
+
+
+div#bg {
+	position:absolute; 
+	height: 100%;
+	width: 100%;
+	background-position:center center;
+	background-size: cover;  
+}
+
+div#bg2 {
+	display: none;
+	position:absolute; 
+	height: 100%;
+	width: 100%;
+	background-position:center center;
+	background-size: cover;  
+	z-index: -1;
+}
+
+
+div#bg_wrapper {
+	position: absolute;
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	z-index: -1;
+}
+
+
+
+div#como_llegar_aba {
+	width: 438px;
+	height: 75px;
+}
+
+div#como_llegar_aba_inner {
+	padding: 25px 0px 0px 16px;
+	font-size: 12px;
+}
+
+div#como_llegar_arr {
+	width: 438px;
+	height: 290px;
+	padding-top: 1px;
+	margin-bottom: 1px;
+}
+
+
+div#como_llegar_box {
+	width: 682px;
+	margin: 0px auto;
+	font-size: 14px;
+}
+
+
+div#como_llegar_der {
+	float: left;
+	width: 439px;
+	height: 367px;
+}
+
+div#como_llegar_direccion {
+	float: left; 
+	width: 334px; 
+}
+
+div#como_llegar_gmaps {
+	margin: 14px 0px 0px 15px;
+	width: 409px;
+	height: 260px;
+	overflow: hidden;
+}
+
+
+
+div#como_llegar_izq {
+	float: left; 
+	width: 242px; 
+	height: 367px;
+	margin-right: 1px;
+}
+
+div#como_llegar_izq_inner {
+	padding: 18px 15px 0px 15px;
+}
+
+
+
+
+div#exteriores_up {
+	margin: 0px auto 1px auto;
+	width: 646px;
+	height: 137px;
+}
+
+div#exteriores_up_inner {
+	padding: 19px 24px 0px 24px;
+}
+
+div#exteriores_up_inner h2 {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 23px;
+	color: #745f48;
+}
+
+div#exteriores_up_inner p {
+	font-size: 14px;
+	color: #40362d;
+	text-align: justify;
+}
+
+
+div.flecha_aba {
+	width: 481px;
+	height: 29px;
+	background-image: url(../img/flecha_aba.png);
+	visibility: hidden;
+}
+
+div.flecha_arr {
+	width: 481px;
+	height: 29px;
+	background-image: url(../img/flecha_arr.png);
+	margin-bottom: 1px; 
+	visibility: hidden;
+}
+
+div.flecha_der {
+	float: left;
+	width: 29px;
+	height: 293px;
+	background-image: url(../img/flecha_der.png);
+	margin-left: 1px; 
+	visibility: hidden;
+}
+
+div.flecha_der2 {
+	float: left;
+	width: 29px;
+	height: 155px;
+	background-image: url(../img/flecha_der.png);
+	background-position: 0px -69px;
+	margin-left: 1px; 
+	visibility: hidden;
+}
+
+
+
+div.flecha_izq {
+	float: left;
+	width: 29px;
+	height: 293px;
+	background-image: url(../img/flecha_izq.png);
+	margin-right: 1px; 
+	visibility: hidden;
+}
+
+
+div.flecha_izq2 {
+	float: left;
+	width: 29px;
+	height: 155px;
+	background-image: url(../img/flecha_izq.png);
+	background-position: 0px -69px;
+	margin-right: 1px; 
+	visibility: hidden;
+}
+
+div.flecha_volver {
+	float: left;
+	width: 30px; 
+	height: 30px;
+	margin-right: 1px;
+	background-image: url(../img/flecha_volver.png);
+}
+
+
+div.fondo1 {
+	background-image: url(../img/fondo1.png);
+}
+
+div.fondo2 {
+	background-image: url(../img/fondo2.png);
+}
+
+div.fondo3 {
+	background-image: url(../img/fondo3.png);
+}
+
+div#form_col1 {
+	width: 230px; 
+	margin-right: 19px;
+}
+
+div#form_col1 input {
+	width: 228px;
+}
+
+div#form_col2 {
+	width: 349px;
+}
+
+div#form_col2 textarea{
+	width: 347px;
+	height: 65px;
+}
+
+div#form_col2_1 {
+	width: 159px;
+	margin-right: 31px;
+}
+
+div#form_col2_1 input {
+	width: 157px;
+}
+
+div#form_col2_2 {
+	width: 159px;
+}
+
+div#form_col2_2 input {
+	width: 157px;
+}
+
+div.foto_lupa {
+	position: absolute;
+	bottom: 0px;
+	width: 37px;
+	height: 35px;
+	background-image: url(../img/foto_lupa.png);
+}
+
+div#galeria_inner {
+	float: left;
+	width: 646px;
+	height: 100%;
+}
+
+div#galeria_box {
+	margin: 0px auto;
+	width: 706px;
+	height: 293px;
+}
+
+div#galeria_box2 {
+	margin: 0px auto;
+	width: 706px;
+	height: 155px;
+}
+
+
+
+
+div.galeria_foto {
+	float: left;
+	width: 142px;
+	height: 122px;
+	overflow: hidden;
+	border: 2px solid #735d47;
+	margin: 0px 10px 10px 0px;
+}
+
+div#galeria_wrapper {
+	margin: 16px 0px 0px 16px;
+	width: 624px;
+	height: 262px;
+	overflow: hidden;
+}
+
+
+div.habitacion_bloque_der {
+	float: left;
+	width: 472px;
+	height: 367px;
+}
+
+div.habitacion_caracteristica {
+	float: left;
+	width: 210px;
+	margin-right: 8px;
+}
+
+div.habitacion_descripcion {
+	height: 290px;
+	margin-bottom: 1px;
+}
+
+div.habitacion_descripcion_inner {
+	padding: 19px 17px;
+	font-size: 14px;
+	line-height: 17px;
+}
+
+div#habitacion_foto {
+	position: relative;
+	border: 3px solid #715c47;
+	width: 169px;
+	height: 199px;
+	overflow: hidden;
+	margin-bottom: 13px;
+	
+}
+
+
+div.habitacion_galeria {
+	float: left;
+	margin-right: 1px;
+	width: 209px;
+	height: 367px;
+}
+
+div.habitacion_galeria_inner {
+	margin: 17px 0px 0px 16px;
+}
+
+div.habitacion_precio{
+	position: relative;
+	height: 76px;
+}
+
+div.habitacion_precio_boton {
+	position: absolute; 
+	bottom: 8px; 
+	right: 17px; 
+}
+
+div.habitacion_precio_inner {
+	position: relative;
+	padding: 10px 17px;
+	font-size: 12px;
+	color: #40362d;
+	line-height: 17px;
+}
+
+div#habitacion_reserva {
+	position: relative;
+	float: left;
+	width: 646px;
+	height: 293px;
+}
+
+div#habitacion_reserva_inner {
+	padding: 19px 24px;
+}
+
+div#habitacion_reserva_recibido {
+	position: relative;
+	float: left;
+	width: 646px;
+	height: 125px;
+}
+
+
+
+div.habitacion_resumen {
+	position: relative;
+	width: 240px; 
+	height: 48px; 
+	margin-bottom: 1px;
+	background-image: url(../img/habitacion_resumen_fondo.png);
+	font-size: 14px;
+}
+
+div.habitacion_resumen_foto {
+	float: left;
+	margin: 7px 6px 0px 7px;
+	width: 55px; 
+	height: 34px; 
+	overflow: hidden;
+}
+
+div.habitacion_resumen_precio {
+	position: absolute; 
+	right: 0px;
+	width: 46px;
+	height: 48px;
+	background-image: url(../img/habitacion_resumen_fondo2.png);
+}
+
+div.habitacion_resumen_precio_inner {
+	text-align: right;
+	margin: 17px 8px 0px 0px;
+	color: #634d36;
+}
+
+div.habitacion_resumen_texto {
+	float: left;
+	margin: 17px 0px 0px 0px;
+	width: 126px;
+	font-size: 14px;
+	color: #855e2c;
+}
+
+
+div.habitacion_thumb {
+	float: left;
+	width: 51px;
+	height: 51px;
+	border: 2px solid #715c47;
+	margin: 0px 5px 5px 0px;
+	overflow: hidden;
+}
+
+div.habitacion_thumbs {
+	width: 190px;
+	height: 120px;
+	overflow: hidden;
+}
+
+
+
+
+div.habitaciones_boton {
+	position: relative;
+	width: 185px;
+	height: 52px;
+	background-image: url(../img/habitaciones_boton.png);
+	margin-bottom: 1px;
+	color: #855e2c;
+	font-size: 14px;
+}
+
+div.habitaciones_boton:hover {
+	background-position: 0 -52px;
+	color: #745f48;
+}
+
+div.habitaciones_boton_imagen {
+	float: left;
+	margin: 7px 6px 0px 7px;
+	width: 55px;
+	height: 34px;
+	overflow: hidden;
+}
+
+div.habitaciones_boton_texto {
+	float: left;
+	margin: 20px 0px 0px 0px;
+}
+
+
+div.habitaciones_boton2 {
+	position: relative;
+	width: 185px;
+	height: 34px;
+	background-image: url(../img/habitaciones_boton2.png);
+	margin-bottom: 1px;
+	color: #855e2c;
+	font-size: 14px;
+}
+
+div.habitaciones_boton2:hover {
+	background-position: 0 -34px;
+	color: #745f48;
+}
+
+div.habitaciones_boton2_imagen {
+	float: left;
+	margin: 4px 4px 0px 4px;
+	width: 44px;
+	height: 26px;
+	overflow: hidden;
+}
+
+div.habitaciones_boton2_texto {
+	float: left;
+	margin: 10px 0px 0px 0px;
+}
+
+
+
+div.habitaciones_box {
+	float: left;
+	width: 744px;
+}
+
+div#habitaciones_box {
+	position: relative;
+	margin: 0px auto;
+	width: 744px;
+	height: 367px;
+	overflow: hidden;
+}
+
+div#habitaciones_box_inner {
+	position: absolute;
+	width: 3720px;
+	height: 349px;
+}
+
+div#habitaciones_box1 {
+	margin: 0px 67px;
+	width: 609px;
+	height: 293px;
+}
+
+div#habitaciones_box2 {
+	margin-left: 52px;
+	width: 639px;
+	height: 349px;
+}
+
+div#habitaciones_box3 {
+	width: 744px;
+	height: 367px;
+}
+
+div#habitaciones_box4 {
+	margin: 0px 37px;
+	width: 677px;
+	height: 293px;
+	font-size: 14px;
+}
+
+div#habitaciones_box5 {
+	margin: 82px 37px;
+	width: 677px;
+	height: 125px;
+	font-size: 14px;
+}
+
+div#habitaciones_imagen {
+	width: 185px; 
+	height: 134px;
+	overflow: hidden;
+}
+
+div#habitaciones_menu {
+	float: left;
+	width: 185px; 
+	height: 293px;
+}
+
+div.habitaciones_menu2 {
+	float: left;
+	width: 185px; 
+	height: 349px;
+}
+
+div#habitaciones_texto {
+	float: left;
+	width: 422px; 
+	height: 293px;
+	margin-right: 1px;
+}
+
+div.habitaciones_texto2 {
+	float: left;
+	width: 422px; 
+	height: 349px;
+	margin-right: 1px;
+}
+
+
+div#habitaciones_texto_inner {
+	margin: 19px 22px 0px 24px;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: justify;
+}
+
+
+
+div#menu {
+	position: absolute;
+	width: 100%;
+	height: 120px;
+	z-index: 2;
+	font-size: 14px;
+}
+
+div#menu a {
+	color: #d6c9b2;
+}
+
+div.menu_boton {
+	position: relative;
+}
+
+
+div.menu_boton_activo {
+	border-top: 1px solid #462c13;
+	height: 49px;
+	margin-top: -1px;
+	background-image: url(../img/menu_fondo.png);
+}
+
+div.menu_boton:hover {
+	border-top: 1px solid #462c13;
+	height: 49px;
+	margin-top: -1px;
+	background-image: url(../img/menu_fondo.png);
+}
+
+div#menu_contenido {
+	margin: 0px auto;
+	width: 760px;
+	height: 50px;
+}
+
+
+div.menu_enlace {
+	margin: 30px 20px 0px 20px;
+	
+}
+
+div#menu_fondo {
+	position: relative;
+	width: 100%;
+	height: 50px;
+	background-color: #462c13;
+	padding-top: 1px;
+	margin-top: -1px;
+}
+
+div#menu_der {
+	position: absolute; 
+	left: 50%;
+	margin-left: 94px;
+	width: 400px;
+	height: 50px;
+}
+
+div.menu_grupo {
+	position: relative;
+}
+
+div#menu_izq {
+	position: absolute; 
+	right: 50%;
+	margin-right: 94px;
+	width: 400px;
+	height: 50px;
+}
+
+div#menu_logo {
+	position: absolute; 
+	left: 50%;
+	margin-left: -94px;
+	width: 188px; 
+	height: 120px;
+	z-index: 3; 
+}
+
+div.menu_separador {
+	width: 1px;
+	height: 50px;
+	background-color: #543b22;
+	border-right: 1px solid #3d220c;
+}
+
+
+div.menu_sub {
+	position: relative;
+	top: 6px;
+	width: 100%;
+	height: 0px; 
+	overflow: hidden;
+}
+
+div.menu_sub_enlace {
+	background-color: #462610;
+	border-left: 1px solid #3d220c;
+	border-right: 1px solid #3d220c;
+	text-align: center;
+	padding: 6px 0px;
+	margin-bottom: 1px;
+	font-size: 12px;
+}
+
+div.menu_sub_enlace:hover {
+	background-color: #5c3d28;
+}
+
+
+div.menu_sub_enlace_activo {
+	background-color: #5c3d28;
+}
+
+
+div.oferta_bloque_der {
+	float: left;
+	width: 470px;
+	height: 397px;
+}
+
+div.oferta_caracteristicas {
+	position: relative;
+	width: 472px;
+	height: 152px;
+}
+
+div.oferta_caracteristicas_inner {
+	padding: 13px 17px 0px 17px;
+}
+
+div.oferta_caracteristicas_texto {
+	position: absolute; 
+	bottom: 11px;
+	left: 17px;
+}
+
+div.oferta_descripcion {
+	width: 472px;
+	height: 244px;
+	font-size: 14px;
+	margin-bottom: 1px;
+}
+
+div.oferta_descripcion_inner {
+	padding: 19px 17px 0px 17px;
+}
+
+div.oferta_detalle {
+	float: left;	
+}
+div.oferta_precios {
+	float: left;
+}
+
+
+div.oferta_foto {
+	float: left;
+	width: 209px;
+	height: 397px;
+	overflow: hidden;
+	margin-right: 1px;
+}
+
+
+div.oferta_resumen {
+	float: left;
+	width: 457px;
+	height: 72px;
+	margin: 0px 1px 1px 0px;
+	font-size: 13px;
+}
+
+div.oferta_resumen_descripcion {
+	float: left; 
+	margin-top: 10px;
+	width: 322px; 
+	height: 56px;
+	color: #40362d;
+	overflow: hidden;
+}
+
+div.oferta_resumen_flecha {
+	float: left;
+	width: 23px; 
+	height: 72px;
+	margin-bottom: 1px; 
+	background-image: url(../img/oferta_resumen_flecha.png);
+}
+
+div.oferta_resumen_foto {
+	float: left; 
+	width: 110px;
+	height: 72px;
+	overflow: hidden;
+	margin-right: 10px;
+}
+
+
+
+div.ofertas_box {
+	float: left;
+	width: 713px;
+}
+
+div#ofertas_box {
+	position: relative;
+	margin: 0px auto;
+	width: 713px;
+	height: 398px;
+	overflow: hidden;
+}
+
+div#ofertas_box_inner {
+	position: absolute;
+	width: 1426px;
+	height: 398px;
+}
+
+div#ofertas_box1 {
+	margin: 0px 116px;
+	width: 481px;
+	height: 351px;
+}
+
+div#ofertas_box2 {
+	width: 713px;
+	height: 398px;
+}
+
+div#ofertas_imagen {
+	width: 185px; 
+	height: 134px;
+	overflow: hidden;
+}
+
+
+div#ofertas_listado_wrapper {
+	height: 292px;
+}
+
+div#ofertas_texto {
+	float: left;
+	width: 422px; 
+	height: 293px;
+	margin-right: 1px;
+}
+
+
+
+
+
+
+
+div#pie {
+	position: absolute; 
+	width: 100%;
+	height: 56px;
+	bottom: 0px; 
+	z-index: 2;
+}
+
+div#pie_contenido {
+	width: 100%;
+	height: 50px;
+	background-color: #462c13;
+}
+
+div#pie_direccion {
+	position: absolute;
+	bottom: 11px;
+	left: 14px;
+	color: white;
+	opacity: 0.52;
+}
+
+div#pie_logos {
+	position: absolute; 
+	right: 11px; 
+	top: 6px;
+	text-align: right;
+	width: 300px; 
+}
+
+div#pie_logos p {
+	color: white;
+	opacity: 0.52;
+}
+
+div#pie_trans {
+	width: 100%;
+	height: 6px; 
+	background-color: #462c13;
+	opacity: 0.4;
+	
+}
+
+div.principal_fondo {
+	position: absolute;
+	opacity: 0.85;
+	z-index: -1;
+}
+
+div.principal_fondo_cuerpo {
+	margin-bottom: 1px;
+}
+
+div#principal_fondo_cuerpo_como_llegar {
+	background-color: black;
+	height: 439px;
+	opacity: 0.4 !important;
+}
+
+div#principal_fondo_cuerpo_habitaciones {
+	background-color: black;
+	height: 364px;
+	opacity: 0.4 !important;
+}
+
+div#principal_fondo_cuerpo_hotel_actividades {
+	background-color: black;
+	height: 364px;
+	opacity: 0.4 !important;
+}
+
+div#principal_fondo_cuerpo_hotel_exteriores {
+	background-color: black;
+	height: 364px;
+	opacity: 0.4 !important;
+}
+div#principal_fondo_cuerpo_hotel_interiores {
+	background-color: black;
+	height: 364px;
+	opacity: 0.4 !important;
+}
+
+div#principal_fondo_cuerpo_hotel_principal {
+	background-color: #291604;
+	height: 296px;
+}
+
+div#principal_fondo_cuerpo_ofertas {
+	background-color: black;
+	height: 423px;
+	opacity: 0.4 !important;
+}
+
+div#principal_fondo_cuerpo_tarifas {
+	background-color: black;
+	height: 317px;
+	opacity: 0.4 !important;
+}
+
+
+div.principal_fondo_linea {
+	height: 2px; 
+	margin-bottom: 1px;
+	opacity: 0.85;
+}
+
+
+div.principal_fondo_linea_como_llegar {
+	background-color: black;
+	opacity: 0.4 !important;
+}
+div.principal_fondo_linea_habitaciones {
+	background-color: black;
+	opacity: 0.4 !important;
+}
+div.principal_fondo_linea_hotel_actividades {
+	background-color: black;
+	opacity: 0.4 !important;
+}
+div.principal_fondo_linea_hotel_exteriores {
+	background-color: black;
+	opacity: 0.4 !important;
+}
+div.principal_fondo_linea_hotel_interiores {
+	background-color: black;
+	opacity: 0.4 !important;
+}
+
+div.principal_fondo_linea_hotel_principal {
+	background-color: #291604;
+}
+
+div.principal_fondo_linea_ofertas {
+	background-color: black;
+	opacity: 0.4 !important;
+}
+
+div.principal_fondo_linea_tarifas {
+	background-color: black;
+	opacity: 0.4 !important;
+}
+
+
+
+
+div#principal_fondo_como_llegar {
+	top: 102px;
+	width: 100%;
+}
+div#principal_fondo_habitaciones {
+	top: 140px;
+	width: 100%;
+}
+div#principal_fondo_hotel_actividades {
+	top: 140px;
+	width: 100%;
+}
+div#principal_fondo_hotel_exteriores {
+	top: 140px;
+	width: 100%;
+}
+div#principal_fondo_hotel_interiores {
+	top: 140px;
+	width: 100%;
+}
+div#principal_fondo_hotel_principal {
+	top: 173px;
+	width: 100%;
+}
+div#principal_fondo_ofertas {
+	top: 109px;
+	width: 100%;
+}
+div#principal_fondo_tarifas {
+	top: 140px;
+	width: 100%;
+}
+
+
+div.principal {
+	z-index: 2;
+}
+
+div#principal_como_llegar {
+	margin-top: 141px;
+}
+div#principal_habitaciones {
+	margin-top: 146px;
+}
+div#principal_hotel_actividades {
+	margin-top: 176px;
+}
+
+div#principal_hotel_exteriores {
+	margin-top: 176px;
+}
+div#principal_hotel_interiores {
+	margin-top: 176px;
+}
+
+div#principal_hotel_principal {
+	margin-top: 176px;
+	text-align: center;
+}
+
+div#principal_hotel_principal p {
+	font-family: 'Droid Serif', serif;
+	font-weight: 400;
+	display: block;
+	margin: 0px auto;
+	width: 705px;
+	font-size: 16px;
+	text-align: justify;
+	line-height: 24px;
+	color: #d1c3aa;
+}
+div#principal_ofertas {
+	margin-top: 125px;
+}
+div#principal_tarifas {
+	margin-top: 178px;
+}
+
+
+div#principal_wrapper {
+	position: relative;
+	padding-top: 1px;
+	margin-top: -1px;
+}
+
+div.slide {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+div.slide_wrapper {
+	position: relative;
+	overflow: hidden;
+}
+
+
+div#tarifas_abajo {
+	margin: 9px 0px 0px 0px;
+	padding: 15px 10px; 
+	background-color: #d7cab8;
+	text-align: center;
+	color: #40362d;
+}
+
+div#tarifas_box {
+	margin: 0px auto;
+	width: 723px;
+}
+
+div.tarifas_col {
+	float: left;
+	width: 240px;
+	margin-right: 1px;
+}
+
+
+div#temp {
+	display: none;
+}
+
+
+div#todo {
+	width: 100%;
+	min-height: 100%;
+//	min-height: 585px;
+	padding-top: 1px;
+}
+
+
+h2 {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 23px;
+	color: #745f48;
+}
+
+h2.principal {
+	font-family: 'Playfair Display', serif;
+	font-weight: 400;
+	font-size: 54px;
+	font-style: normal;
+	color: #d6c9b2;
+}
+
+
+input[type=button], input[type=submit] {
+	border: 1px solid #5e412b;
+	background-image: url(../img/boton_fondo.png);
+	background: linear-gradient(#846d5a,#593c26);
+	color: #ded7c8;
+	padding: 2px 6px;
+	font-size: 11px;
+}
+
+input[type=checkbox] {display: none;}
+input[type=checkbox] + label {
+display: block;
+float: left;
+width: 8px;
+height: 8px;
+background: url(../img/checkbox.png) 0px 0px no-repeat;
+	margin: 4px 4px 0px 0px;
+	color: transparent;
+	
+}
+input[type=checkbox]:checked + label {
+background: url(../img/checkbox.png) 0px -8px no-repeat;
+}
+
+
+input[type=text] {
+	background-color: #e7dfd2;
+	border: 1px solid #c1b39e;
+	margin-bottom: 14px;
+}
+
+label {
+	line-height: 14px;
+	font-size: 12px;
+}
+
+li {
+	background-image: url(../img/li.png);
+	background-repeat: no-repeat;
+	background-position: 0px 7px;
+	padding: 0px 10px;
+}
+
+li.detalle {
+	background-image: url(../img/li2.png);
+	background-repeat: no-repeat;
+	background-position: 0px 3px;
+	padding: 0px 13px;
+	margin-bottom: 6px;
+}
+
+
+span.habitacion_precio {
+	font-size: 17px;
+	color: #745f48;
+}
+
+span#recomendado {
+	color: white;
+}
+
+
+textarea {
+	background-color: #e7dfd2;
+	border: 1px solid #c1b39e;
+	resize: none;
+}
+
+ul.caracteristicas li {
+	margin-bottom: 7px;
+	background-position: 0px 4px;
+}
+
+ul.como_llegar li {
+	background-image: url(../img/li2.png);
+	background-repeat: no-repeat;
+	background-position: 0px 5px;
+	padding: 0px 13px;
+	line-height: 17px;
+	margin-bottom: 20px;
+}
+

