@@ -29,7 +29,7 @@ class plantilla {
 	
 	
 	function cabecera_html() {
-
+		global $mysqli;
 		$seccion = $GLOBALS["seccion"];
 		$titulos["habitaciones"] = "HABITACIONES";
 		$titulos["tarifas"] = "TARIFAS";
@@ -85,7 +85,7 @@ class plantilla {
 	
 	
 	function cabecera() {
-		
+		global $mysqli;
 		$o .= "	
 			<div id='cabecera_interior'>
 				<div id='logo'><span class='todo' onclick=\"return menu_abrir('principal');\"></span></div>
@@ -109,7 +109,7 @@ class plantilla {
 	
 	
 	function como_llegar() {
-
+		global $mysqli;
 		$texto = new texto();
 		
 		$o .= "
@@ -179,7 +179,7 @@ class plantilla {
 	
 	
 	function habitaciones() {
-
+		global $mysqli;
 		if ($_REQUEST["externo"]) {
 			if ($_REQUEST["id_tipo"]) {
 				$b2 .= $this->habitaciones_tipo() . "</div>";
@@ -242,7 +242,7 @@ class plantilla {
 		$o .= "	<div class='habitaciones_boton cursor' onclick=\"habitaciones_boton(2,11);\">
 					<div class='habitaciones_boton_imagen'>" . $texto->imagen($width, $height) . "</div>
 					<div class='habitaciones_boton_texto'>" . $texto->datos["texto"] . "</div>
-					<a class='todo' href='?s=habitaciones&paso=2&id_habitacion=11&externo=1&habitacion=" . htmlentities("HABITACIÓN DOBLE") . "' onclick='return no();'></a>			
+					<a class='todo' href='?s=habitaciones&paso=2&id_habitacion=11&externo=1&habitacion=" . htmlentities("HABITACIï¿½N DOBLE") . "' onclick='return no();'></a>			
 				</div>
 				";
 
@@ -299,7 +299,7 @@ class plantilla {
 	
 	
 	function habitaciones_tipo() {
-		
+		global $mysqli;
 		$id_tipo = $_REQUEST["id_tipo"];
 
 		$o .= "
@@ -332,13 +332,13 @@ class plantilla {
 		$height = 34;
 		
 		$q = "SELECT * FROM habitacion WHERE id_tipo = $id_tipo AND activo = 1 ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			include_once("habitacion.php");
 			$habitacion = new habitacion();
 		
-			while ($habitacion->datos = mysql_fetch_array($r)) {
+			while ($habitacion->datos = $r->fetch_array()) {
 				$habitacion->id = $habitacion->datos["id"];
 				$o .= $habitacion->boton();	
 			}
@@ -360,7 +360,7 @@ class plantilla {
 	
 	
 	function hotel_principal() {
-		
+		global $mysqli;
 		$texto = new texto();
 		
 		$o .= "
@@ -381,16 +381,16 @@ class plantilla {
 	
 	
 	function hotel_actividades() {
-		
+		global $mysqli;
 		include_once("actividad.php");
 		$actividad = new actividad();
 		
 		$q = "SELECT * FROM actividad WHERE activo = 1 ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$o .= "<div id='actividades_box'>";
-			while ($actividad->datos = mysql_fetch_array($r)) {
+			while ($actividad->datos = $r->fetch_array()) {
 				 $actividad->id = $actividad->datos["id"];
 				 $o .= $actividad->plantilla();
 			}
@@ -403,7 +403,7 @@ class plantilla {
 	
 	
 	function hotel_exteriores() {
-		
+		global $mysqli;
 		$texto = new texto;
 		
 		$o .= "
@@ -435,7 +435,8 @@ class plantilla {
 	
 	
 	function menu() {
-		
+		global $mysqli;
+		 
 		$seccion = $GLOBALS["seccion"];
 		$activo[$seccion] = "menu_boton_activo";
 		
@@ -448,7 +449,7 @@ class plantilla {
 				";
 		
 		$q = "SELECT * FROM seccion WHERE id_padre = 0 AND activo = 1 ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "
 		<div id='menu_izq'>
@@ -519,7 +520,8 @@ class plantilla {
 	
 	
 	function ofertas() {
-
+		global $mysqli;
+		 
 		include_once("oferta.php");
 		$oferta = new oferta();
 			
@@ -545,16 +547,16 @@ class plantilla {
 		$fecha = fecha_hoy();
 		
 		$q = "SELECT * FROM oferta WHERE activo = 1 AND (fecha_fin is NULL OR fecha_fin >= '$fecha') ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if ($num = mysql_num_rows($r)) {
+		if ($num = $r->num_rows) {
 			if ($num > 4) {
 				$alto = $num*73;
 			} else {
 				$alto = 292;
 			}
 			$o .= "<div class='slide' id='ofertas_listado' style='height: " . $alto . "px;'>";
-			while ($oferta->datos = mysql_fetch_array($r)) {
+			while ($oferta->datos = $r->fetch_array()) {
 				$oferta->id = $oferta->datos["id"];
 				$o .= $oferta->plantilla_resumen();
 			}
@@ -600,7 +602,8 @@ class plantilla {
 	
 	
 	function pie() {
-		
+		global $mysqli;
+		 
 		$texto = new texto();
 		
 		
@@ -615,7 +618,7 @@ class plantilla {
 					<span id='recomendado'>&nbsp;</span>
 					<div style='height: 7px;'></div>
 					<a href='http://www.guiarepsol.com/es_es/turismo/reportajes/otros/seleccion_hoteles_rurales.aspx' onclick=\"window.open('http://www.guiarepsol.com/es_es/turismo/reportajes/otros/seleccion_hoteles_rurales.aspx');return false;\" onkeypress=onclick=\"window.open('http://www.guiarepsol.com/es_es/turismo/reportajes/otros/seleccion_hoteles_rurales.aspx');return false;\"><img class='3rd' id='third_repsol' src='img/logo_repsol.png' alt='Recomendado en Gu&iacute;a Repsol'/></a>
-					<a href='http://www.latribunadetalavera.es/noticia.cfm/Local/20101127/familia/cope/60C83AC0-DAB2-C705-84102A2F601D3CD4' onclick=\"window.open('http://www.latribunadetalavera.es/noticia.cfm/Local/20101127/familia/cope/60C83AC0-DAB2-C705-84102A2F601D3CD4');return false;\" onkeypress=onclick=\"window.open('http://www.latribunadetalavera.es/noticia.cfm/Local/20101127/familia/cope/60C83AC0-DAB2-C705-84102A2F601D3CD4');return false;\"><img class='3rd' id='third_cope' src='img/logo_cope.png' alt='Premio COPE al mérito empresarial'/></a>
+					<a href='http://www.latribunadetalavera.es/noticia.cfm/Local/20101127/familia/cope/60C83AC0-DAB2-C705-84102A2F601D3CD4' onclick=\"window.open('http://www.latribunadetalavera.es/noticia.cfm/Local/20101127/familia/cope/60C83AC0-DAB2-C705-84102A2F601D3CD4');return false;\" onkeypress=onclick=\"window.open('http://www.latribunadetalavera.es/noticia.cfm/Local/20101127/familia/cope/60C83AC0-DAB2-C705-84102A2F601D3CD4');return false;\"><img class='3rd' id='third_cope' src='img/logo_cope.png' alt='Premio COPE al mï¿½rito empresarial'/></a>
 					<a href='http://www.trivago.es/valdeverdeja-104591/hotel/la-almazara-165286/opiniones' onclick=\"window.open('http://www.trivago.es/valdeverdeja-104591/hotel/la-almazara-165286/opiniones');return false;\" onkeypress=onclick=\"window.open('http://www.trivago.es/valdeverdeja-104591/hotel/la-almazara-165286/opiniones');return false;\"><img class='3rd' id='third_trivago' src='img/logo_trivago.png' alt='&nbsp;'/></a>
 					<a href='http://www.tripadvisor.es/Hotel_Review-g1072382-d1341533-Reviews-Almazara_de_Valdeverdeja-Valdeverdeja_Province_of_Toledo_Castile_La_Mancha.html' onclick=\"window.open('http://www.tripadvisor.es/Hotel_Review-g1072382-d1341533-Reviews-Almazara_de_Valdeverdeja-Valdeverdeja_Province_of_Toledo_Castile_La_Mancha.html');return false;\" onkeypress=onclick=\"window.open('http://www.tripadvisor.es/Hotel_Review-g1072382-d1341533-Reviews-Almazara_de_Valdeverdeja-Valdeverdeja_Province_of_Toledo_Castile_La_Mancha.html');return false;\"><img class='3rd' id='third_tripadvisor' src='img/logo_tripadvisor.png' alt='Recomendado en Trip Advisor'/></a>
 					<a href='http://www.johansens.com/spain/toledo' onclick=\"window.open('http://www.johansens.com/spain/toledo');return false;\" onkeypress=onclick=\"window.open('http://www.johansens.com/spain/toledo');return false;\"><img class='3rd' id='third_j' src='img/logo_j.png' alt='Recomendado por Conde Nast Johansen&apos;s Prefred Hotels'/></a>
@@ -634,7 +637,8 @@ class plantilla {
 	
 	
 	function presentacion() {
-		
+		global $mysqli;
+		 
 		$texto = new texto();
 		
 		
@@ -656,6 +660,7 @@ class plantilla {
 	
 	
 	function principal() {
+		global $mysqli;
 		
 		$this->seccion = $GLOBALS["seccion"];
 		$sub = $GLOBALS["sub"];
@@ -690,22 +695,21 @@ class plantilla {
 			";
 		}*/
 
-		
 		$q = "SELECT * FROM texto WHERE nombre like 'fondo'";
-		$r = mysql_query($q);
-		
-		if (mysql_num_rows($r)) {
+		$r = $mysqli->query($q);
+
+		if ($r->num_rows) {
 			include_once("seccion.php");
 			$sec = new seccion();
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				$sec->id = $fila["id_seccion"];
 				$sec->recuperar();
 				$nombre = $sec->datos["nombre"];
 				
 				$q = "SELECT nombre FROM imagen WHERE id_relacionada = " . $fila["id"] . " AND id_imagen_tipo = 3";
-				$r2 = mysql_query($q);
+				$r2 = $mysqli->query($q);
 				
-				$archivo = mysql_result($r2,0,0);
+				$archivo = mysqli_result($r2,0,0);
 				
 				$fondos[$nombre] = $archivo;
 			}
@@ -806,7 +810,7 @@ class plantilla {
 	
 	
 	function seccion() {
-		
+		global $mysqli;
 		$this->seccion = $_REQUEST["s"];
 		$sub = $_REQUEST["sub"];
 		
@@ -841,7 +845,7 @@ class plantilla {
 	
 	
 	function tarifas() {
-
+		global $mysqli;
 		include_once("habitacion.php");
 		$hab = new habitacion();
 		
@@ -851,14 +855,14 @@ class plantilla {
 		<div id='tarifas_box'>";
 		
 		$q = "SELECT * FROM habitacion WHERE activo = 1 ORDER BY id_tipo, orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if ($num = mysql_num_rows($r)) {
+		if ($num = $r->num_rows) {
 			$num_hab = ceil($num / 3);
 			
 			$o .= "<div class='tarifas_col'>";
 			$i = 0;
-			while ($hab->datos = mysql_fetch_array($r)) {
+			while ($hab->datos = $r->fetch_array()) {
 				if ($i == $num_hab) {
 					$i = 0;
 					$o .= "</div><div class='tarifas_col'>";

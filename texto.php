@@ -32,6 +32,7 @@ class texto {
 
 	
 	function editar() {
+		global $mysqli;
 
 		if ($_REQUEST["id_texto"]) {
 			if (is_numeric($_REQUEST["id_texto"])) {
@@ -83,7 +84,7 @@ class texto {
 	
 	
 	function editar_general() {
-	
+		global $mysqli;
 	
 		if ($_REQUEST["grabar"]) {
 			
@@ -125,14 +126,14 @@ class texto {
 			
 				if ($post->valores["id_seccion"]) {
 					$q = $post->consulta($this->id,'texto','', $extra, 'id');
-					mysql_query($q);
+					$mysqli->query($q);
 					
 					if (!$this->id) {
-						$this->id = mysql_insert_id();
+						$this->id = $mysqli->insert_id;
 						$this->recuperar();
 						loggear("texto - alta - $this->id - " . $this->datos["titulo"]);
 					} else {
-						loggear("texto - edición - $this->id - " . $this->datos["titulo"]);
+						loggear("texto - ediciï¿½n - $this->id - " . $this->datos["titulo"]);
 					}
 				}
 				
@@ -234,7 +235,8 @@ class texto {
 
 	
 	function editar_imagenes() {
-	
+		global $mysqli;
+
 		if (!$this->id) {
 			$o .= "<br/>Para editar la imagen principal es necesario primero guardar el texto.";
 			return $o;
@@ -288,7 +290,8 @@ class texto {
 
 	
 	function editar_imagenes_bloque() {
-		
+		global $mysqli;
+
 		$args = func_get_args();
 		
 		if (!$this->id) {
@@ -306,15 +309,15 @@ class texto {
 				WHERE id_imagen_tipo = 3 
 					AND id_relacionada = " . $this->id . "
 				ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 		
 			include_once("imagen.php");
 			$imagen = new imagen();
 			$o .= "Im&aacute;genes: <br/><br/> ";
 			
-			while ($imagen->datos = mysql_fetch_array($r)) {
+			while ($imagen->datos = $r->fetch_array()) {
 				$imagen->id = $imagen->datos["id"];
 				$o .= "<div style='float: left;'><div class='thumb_visor'>" . $imagen->thumb() . "</div><br/>";
 				$o .= "<div style='text-align:center;'>";
@@ -339,7 +342,8 @@ class texto {
 	
 	
 	function imagen($width, $height) {
-		
+		global $mysqli;
+
 		if (!$this->id) {
 			return;
 		}
@@ -355,12 +359,12 @@ class texto {
 			 FROM imagen
 			 WHERE id_imagen_tipo = 3 AND id_relacionada = $this->id 
 			 ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
-			while ($imagen->datos = mysql_fetch_array($r)) {
+			while ($imagen->datos = $r->fetch_array()) {
 				$imagen->id = $imagen->datos["id"];
 				$o .= $imagen->thumb($width,$height);
 				$i += 1;
@@ -397,7 +401,8 @@ class texto {
 	
 	
 	function plantilla() {
-		
+		global $mysqli;
+
 		$o .= "<strong>" . $this->datos["nombre"] . "</strong> <br/>
 			<br/>
 			<strong>T&iacute;tulo: </strong>
@@ -414,12 +419,14 @@ class texto {
 	
 	
 	function recuperar() {
+		global $mysqli;
+
 		if ($this->id) {
 			$q = "SELECT * FROM $this->tabla WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);	
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();	
 			}
 		}
 		
@@ -436,6 +443,7 @@ class texto {
 	
 	
 	function tabla() {
+		global $mysqli;
 
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
@@ -458,14 +466,14 @@ class texto {
 				FROM texto 
 					LEFT JOIN seccion ON seccion.id = texto.id_seccion 
 				ORDER BY seccion.nombre, texto.nombre";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "
 				<input type='hidden' id='hoja' value='" . $_REQUEST["hoja"] . "'/>
 				<input type='button' value='NUEVO' onclick=\"modulo(['texto', 'editar', '', 'bloque2_trabajo', 0, 0]);\" style='float: right; margin: 5px 2px 5px 2px;'/>
 		";
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
 			
 			$o .= "
@@ -484,7 +492,7 @@ class texto {
 				</div>
 			";
 			
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				if (($i % 2) == 0) {
 					$clase = "tabla_par";
 				} else {
@@ -516,7 +524,8 @@ class texto {
 	
 	
 	function tabla_fila() {
-		
+		global $mysqli;
+
 		if ($this->datos["id_seccion"]) {
 			$seccion = new seccion();
 			$seccion->id = $this->datos["id_seccion"];
@@ -553,7 +562,8 @@ class texto {
 	
 	
 	function texto($sec, $nombre) {
-		
+		global $mysqli;
+
 		include_once("seccion.php");
 		$seccion = new seccion();
 		$seccion->seccion($sec);
@@ -563,10 +573,10 @@ class texto {
 		}
 		
 		$q = "SELECT * FROM texto WHERE id_seccion = $seccion->id AND nombre = '$nombre'";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$this->datos = mysql_fetch_array($r);
+		if ($r->num_rows) {
+			$this->datos = $r->fetch_array();
 			$this->id = $this->datos["id"];
 		}
 		
@@ -578,7 +588,8 @@ class texto {
 	
 	
 	function titulo($sec, $nombre) {
-		
+		global $mysqli;
+
 		include_once("seccion.php");
 		$seccion = new seccion();
 		$seccion->seccion($sec);
@@ -588,10 +599,10 @@ class texto {
 		}
 		
 		$q = "SELECT * FROM texto WHERE id_seccion = $seccion->id AND nombre = '$nombre'";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$this->datos = mysql_fetch_array($r);
+		if ($r->num_rows) {
+			$this->datos = $r->fetch_array();
 			$this->id = $this->datos["id"];
 		}
 		

@@ -35,7 +35,8 @@ class imagen {
 	
 	
 	function borrar() {
-		
+		global $mysqli;
+
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
 		}
@@ -48,20 +49,20 @@ class imagen {
 		}
 
 		$q = "SELECT nombre FROM imagen_tipo WHERE id = " . $this->datos["id_imagen_tipo"];
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$sub = mysql_result($r,0,0) . "/";
+		if ($r->num_rows) {
+			$sub = $rmysqli_result($r,0,0) . "/";
 		}
 		
 		$q = "DELETE FROM imagen WHERE id = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 
 		$q = "UPDATE imagen 
 				SET orden = orden - 1 
 				WHERE id_imagen_tipo = " . $this->datos["id_imagen_tipo"] . "
 					AND orden > " . $this->datos["orden"];
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		
 		$raiz = "../";
@@ -127,7 +128,7 @@ class imagen {
 	
 	
 	function colorbox() {
-		
+		global $mysqli;
 		$args = func_get_args();
 		$ancho = $args[0];
 		$alto = $args[1];
@@ -153,7 +154,7 @@ class imagen {
 
 	
 	function desplazar() {
-
+		global $mysqli;
 		if ($_REQUEST["id_imagen"] && is_numeric($_REQUEST["id_imagen"])) {
 			$this->id = $_REQUEST["id_imagen"];
 			$this->recuperar();
@@ -181,10 +182,10 @@ class imagen {
 									AND orden > " . $this->datos["orden"] . "
 								ORDER BY orden
 								LIMIT 1";
-						$r = mysql_query($q);
+						$r = $mysqli->query($q);
 						
-						if (mysql_num_rows($r)) {
-							$orden_nuevo = mysql_result($r,0,0);
+						if ($r->num_rows) {
+							$orden_nuevo = $rmysqli_result($r,0,0);
 							$cambiar = 1;
 						} else {
 							$cambiar = 0;
@@ -198,10 +199,10 @@ class imagen {
 									AND orden < " . $this->datos["orden"] . "
 								ORDER BY orden DESC
 								LIMIT 1";
-						$r = mysql_query($q);
+						$r = $mysqli->query($q);
 										
-						if (mysql_num_rows($r)) {
-							$orden_nuevo = mysql_result($r,0,0);
+						if ($r->num_rows) {
+							$orden_nuevo = $rmysqli_result($r,0,0);
 							$cambiar = 1;
 						} else {
 							$cambiar = 0;
@@ -244,12 +245,12 @@ class imagen {
 					SET orden = " . $this->datos["orden"] . "
 					WHERE id_imagen_tipo = " . $this->datos["id_imagen_tipo"] . "
 					 AND orden = $orden_nuevo";
-			mysql_query($q);
+			$mysqli->query($q);
 			
 			$q = "UPDATE imagen  
 					SET orden = $orden_nuevo
 					WHERE id = $this->id";
-			mysql_query($q);
+			$mysqli->query($q);
 		}
 				
 		
@@ -293,17 +294,17 @@ class imagen {
 	
 	
 	function directorio() {
-	
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
 		
 		if ($this->datos["id_imagen_tipo"]) {
 			$q = "SELECT nombre FROM imagen_tipo WHERE id = " . $this->datos["id_imagen_tipo"];
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)) {
-				$sub = mysql_result($r,0,0) . "/";
+			if ($r->num_rows) {
+				$sub = $rmysqli_result($r,0,0) . "/";
 			}
 		}
 		
@@ -337,7 +338,7 @@ class imagen {
 	
 	
 	function editar() {
-
+		global $mysqli;
 		if ($_REQUEST["id_imagen"]) {
 			if (is_numeric($_REQUEST["id_imagen"])) {
 				$this->id = $_REQUEST["id_imagen"];
@@ -351,7 +352,7 @@ class imagen {
 			$q = "UPDATE imagen 
 					SET titulo = '" . utf8_decode($_REQUEST["titulo"]) . "'
 				WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
 			return "Imagen grabada correctamente";
 		}
@@ -437,13 +438,13 @@ class imagen {
 	
 	
 	function enlace() {
-		
+		global $mysqli;
 		if ($this->datos["id_imagen_tipo"]) {
 			$q = "SELECT nombre FROM imagen_tipo WHERE id = " . $this->datos["id_imagen_tipo"];
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)) {
-				$sub = mysql_result($r,0,0) . "/";
+			if ($r->num_rows) {
+				$sub = mysqli_result($r,0,0) . "/";
 			}
 		}
 
@@ -463,13 +464,13 @@ class imagen {
 	
 	
 	function enlace_th() {
-		
+		global $mysqli;
 		if ($this->datos["id_imagen_tipo"]) {
 			$q = "SELECT nombre FROM imagen_tipo WHERE id = " . $this->datos["id_imagen_tipo"];
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)) {
-				$sub = mysql_result($r,0,0) . "/";
+			if ($r->num_rows) {
+				$sub = $rmysqli_result($r,0,0) . "/";
 			}
 		}
 
@@ -492,7 +493,7 @@ class imagen {
 	
 	
 	function estilo($ancho, $alto) {
-		
+		global $mysqli;
 		$proporcion = $ancho / $alto;
 		
 		if ($this->datos["height"]) {
@@ -532,16 +533,16 @@ class imagen {
 	
 	
 	function frame($width, $height) {
-		
+		global $mysqli;
 		$q = "SELECT *
 			 FROM imagen
 			 WHERE id_imagen_tipo = $this->id_imagen_tipo AND id_relacionada = $this->id_relacionada
 			 ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
-			while ($this->datos = mysql_fetch_array($r)) {
+			while ($this->datos = $r->fetch_array()) {
 				$this->id = $this->datos["id"];
 				$estilo = $this->estilo($width,$height);
 				if ($i > 0) {
@@ -563,7 +564,8 @@ class imagen {
 	
 	
 	function galeria() {
-		
+		global $mysqli;
+
 		if ($this->id_imagen_tipo == 3)  {
 			$args = func_get_args();
 			
@@ -577,7 +579,7 @@ class imagen {
 		}
 			
 		$q = "SELECT * FROM imagen WHERE 1=1 $where ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "
 		<div id='galeria_box'>
@@ -585,7 +587,7 @@ class imagen {
 			<div class='fondo1' id='galeria_inner'>
 				<div class='slide_wrapper' id='galeria_wrapper'>";
 		
-		if ($num = mysql_num_rows($r)) {
+		if ($num = $r->num_rows) {
 			$num_fotos = ceil($num / 2);
 			if ($num_fotos > 4) {
 				$ancho = $num_fotos*156;
@@ -594,7 +596,7 @@ class imagen {
 			}
 			$o .= "<div class='slide' id='galeria' style='width: " . $ancho . "px;'>";
 			$i = 1;
-			while ($this->datos = mysql_fetch_array($r)) {
+			while ($this->datos = $r->fetch_array()) {
 				$this->id = $this->datos["id"];
 				$o .= "<div class='galeria_foto'>
 						<a class='colorbox' rel='gal' href='" . $this->enlace() . "' title='" . $this->datos["titulo"] . "'>" . $this->thumb(142,122) . "</a>
@@ -625,7 +627,7 @@ class imagen {
 	
 		
 	function galeria2() {
-		
+		global $mysqli;
 		if ($this->id_imagen_tipo == 3)  {
 			$args = func_get_args();
 			
@@ -639,7 +641,7 @@ class imagen {
 		}
 			
 		$q = "SELECT * FROM imagen WHERE 1=1 $where ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "
 		<div id='galeria_box2'>
@@ -647,7 +649,7 @@ class imagen {
 			<div class='fondo2' id='galeria_inner'>
 				<div class='slide_wrapper' id='galeria_wrapper'>";
 		
-		if ($num_fotos = mysql_num_rows($r)) {
+		if ($num_fotos = $r->num_rows) {
 			if ($num_fotos > 4) {
 				$ancho = $num_fotos*156;
 			} else {
@@ -655,7 +657,7 @@ class imagen {
 			}
 			$o .= "<div class='slide' id='galeria' style='width: " . $ancho . "px;'>";
 			$i = 1;
-			while ($this->datos = mysql_fetch_array($r)) {
+			while ($this->datos = $r->fetch_array()) {
 				$this->id = $this->datos["id"];
 				$o .= "<div class='galeria_foto'>
 						<a class='colorbox' rel='gal' href='" . $this->enlace() . "' title='" . $this->datos["titulo"] . "'>" . $this->thumb(142,122) . "</a>
@@ -692,7 +694,7 @@ class imagen {
 	
 	
 	function orden_max() {
-
+global $mysqli;
 		if ($this->id_relacionada) {
 			$where = " AND id_relacionada = $this->id_relacionada";
 		}
@@ -705,10 +707,10 @@ class imagen {
 				ORDER BY orden DESC
 				LIMIT 1";
 			
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$orden = mysql_result($r,0,0);
+		if ($r->num_rows) {
+			$orden = $rmysqli_result($r,0,0);
 		} else {
 			$orden = 0;
 		}
@@ -739,17 +741,17 @@ class imagen {
 	
 	
 	function raiz() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
 		
 		if ($this->datos["id_imagen_tipo"]) {
 			$q = "SELECT nombre FROM imagen_tipo WHERE id = " . $this->datos["id_imagen_tipo"];
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)) {
-				$sub = mysql_result($r,0,0) . "/";
+			if ($r->num_rows) {
+				$sub = $rmysqli_result($r,0,0) . "/";
 			}
 		}
 		
@@ -773,12 +775,13 @@ class imagen {
 	
 	
 	function recuperar() {
+		global $mysqli;
 		if ($this->id) {
 			$q = "SELECT * FROM $this->tabla WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);	
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();	
 			}
 		} else {
 			$this->datos = "";
@@ -794,7 +797,7 @@ class imagen {
 	
 	
 	function seleccionar() {
-		
+		global $mysqli;
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
 		}
@@ -834,18 +837,18 @@ class imagen {
 			$q = "UPDATE rel_circuito_imagen 
 					SET uso = 0 
 					WHERE id_circuito = $id_circuito AND uso = $id";
-			mysql_query($q);
+			$mysqli->query($q);
 			
 			$q = "UPDATE $modulo 
 					SET id_imagen = $id_imagen
 					WHERE id = $id";
-			mysql_query($q);
+			$mysqli->query($q);
 			
 			
 			$q = "UPDATE rel_circuito_imagen
 					SET uso = $id
 					WHERE id_circuito = $id_circuito AND id_imagen = $id_imagen";
-			mysql_query($q);
+			$mysqli->query($q);
 			
 			include_once("imagen.php");
 			$imagen = new imagen();
@@ -866,14 +869,14 @@ class imagen {
 			";
 
 		$q = "SELECT * FROM rel_circuito_imagen WHERE id_circuito = $id_circuito";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "<div id='seleccionar_imagenes'>";
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			include_once('imagen.php');
 			$imagen = new imagen();
 			$imagen->admin = 1;
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				$imagen->id = $fila["id_imagen"];
 				$imagen->recuperar();
 
@@ -885,7 +888,7 @@ class imagen {
 				
 			}
 		} else {
-			$o .= "No hay imágenes relacionadas. ";
+			$o .= "No hay imï¿½genes relacionadas. ";
 		}
 		$o .= "</div>";
 				
@@ -909,7 +912,7 @@ class imagen {
 	
 	
 	function subir() {
-		
+		global $mysqli;
 		if ($_REQUEST["nombre"]) {
 			$nombre = $_REQUEST["nombre"];
 		} else { 
@@ -969,8 +972,8 @@ class imagen {
 		
 		$q = "INSERT INTO imagen (id_imagen_tipo, width, height) 
 					VALUES ($this->id_imagen_tipo, '$w', '$h')";
-		mysql_query($q);
-		$this->id = mysql_insert_id();
+		$mysqli->query($q);
+		$this->id = $mysqli->insert_id;
 		
 		$this->nombre = $this->id . "_" . $file["name"]; 
 		$this->nombre_thumb = "th_" . $this->nombre;
@@ -1027,7 +1030,7 @@ class imagen {
 	
 		if (!isset($resultado)) {
 			$q = "DELETE * FROM imagen WHERE id = $this->id";
-			mysql_query($q);
+			$mysqli->query($q);
 			$this->error = "Ha habido un error al copiar la imagen";
 			return "0;;" . $this->error;
 		}
@@ -1042,24 +1045,24 @@ class imagen {
 						SET id_relacionada = 0
 						WHERE id_relacionada = $this->id_relacionada
 							AND id_imagen_tipo = 2";
-				$r = mysql_query($q);
+				$r = $mysqli->query($q);
 				
 				$q = "UPDATE actividad 
 						SET id_imagen = $this->id
 						WHERE id = $this->id_relacionada";
-				$r = mysql_query($q);
+				$r = $mysqli->query($q);
 								
 			} else if ($this->id_imagen_tipo == 5) {
 				$q = "UPDATE imagen 
 						SET id_relacionada = 0
 						WHERE id_relacionada = $this->id_relacionada
 							AND id_imagen_tipo = 5";
-				$r = mysql_query($q);
+				$r = $mysqli->query($q);
 				
 				$q = "UPDATE oferta 
 						SET id_imagen = $this->id
 						WHERE id = $this->id_relacionada";
-				$r = mysql_query($q);
+				$r = $mysqli->query($q);
 								
 			}
 			
@@ -1073,7 +1076,7 @@ class imagen {
 					orden = " . $tipo->orden_max() . "
 					$update
 				WHERE id = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		$this->recuperar();
 		
@@ -1104,7 +1107,7 @@ class imagen {
 	
 	
 	function tabla() {
-
+		global $mysqli;
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
 		}
@@ -1163,11 +1166,11 @@ class imagen {
 				FROM imagen 
 				WHERE id_imagen_tipo = $this->id_imagen_tipo
 				ORDER BY orden ";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			
-			while ($this->datos = mysql_fetch_array($r)) {
+			while ($this->datos = $r->fetch_array()) {
 				$this->id = $this->datos["id"];
 				$o .= "<div class='img_editar'>" . $this->thumb() . "
 							<div style='clear: both;'></div>";
@@ -1203,7 +1206,7 @@ class imagen {
 		
 	
 	function thumb() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
@@ -1227,13 +1230,13 @@ class imagen {
 	
 	
 	function thumb_enlace() {
-		
+		global $mysqli;
 		if ($this->datos["id_imagen_tipo"]) {
 			$q = "SELECT nombre FROM imagen_tipo WHERE id = " . $this->datos["id_imagen_tipo"];
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)) {
-				$sub = mysql_result($r,0,0) . "/";
+			if ($r->num_rows) {
+				$sub = mysqli_result($r,0,0) . "/";
 			}
 		}
 
@@ -1255,7 +1258,7 @@ class imagen {
 	
 	
 	function ver() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			if ($_REQUEST["id_imagen"] && is_numeric($_REQUEST["id_imagen"])) {
 				$this->id = $_REQUEST["id_imagen"];
@@ -1291,7 +1294,7 @@ class imagen {
 	
 	
 	function ver_th() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			if ($_REQUEST["id_imagen"] && is_numeric($_REQUEST["id_imagen"])) {
 				$this->id = $_REQUEST["id_imagen"];

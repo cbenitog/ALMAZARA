@@ -15,7 +15,7 @@
 //	require_once 'lib/pear/PEAR.php';
 //	require_once 'PEAR.php';
 	
-		// Lo primero es comprobar si los objetos y funcions que nos pasen son válidos
+		// Lo primero es comprobar si los objetos y funcions que nos pasen son vï¿½lidos
 	
 	$objeto_get = $_REQUEST["objeto"];
 	$funcion = $_REQUEST["funcion"];
@@ -34,6 +34,6 @@
 	$return = $objeto->$funcion();
 	echo $return;
 	
-	mysql_close();
+	cerrar_bbdd();
 
 ?>

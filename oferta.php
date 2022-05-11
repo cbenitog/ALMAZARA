@@ -22,7 +22,7 @@ class oferta {
 	
 	
 	function borrar() {
-
+		global $mysqli;
 		if ($_REQUEST["id_oferta"] && is_numeric($_REQUEST["id_oferta"])) {
 			$this->id = $_REQUEST["id_oferta"];
 			$this->recuperar();
@@ -31,7 +31,7 @@ class oferta {
 		}
 		
 		$q = "DELETE FROM oferta WHERE id = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		loggear("oferta - borrar - " . $this->datos["nombre"]);
 		
@@ -46,17 +46,17 @@ class oferta {
 	
 	
 	function caracteristicas() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
 		
 		$q = "SELECT * FROM oferta_caracteristica WHERE id_oferta = $this->id ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$o .= "<ul class='sq'>";
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				$o .= "<li class='sq'>" . $fila["texto"] . " 
 					<span class='a' onclick=\"modulo(['oferta','caracteristica_editar','&id_oferta=$this->id&id_caracteristica=" . $fila["id"] . "', 'caracteristica_editar',0,0]);\">editar</span>
 					<span class='a' onclick=\"modulo(['oferta','caracteristica_desplazar','&desp=-1&id_caracteristica=" . $fila["id"] . "', 'caracteristicas',0,0]);\">subir</span>
@@ -74,7 +74,7 @@ class oferta {
 	
 	
 	function caracteristica_borrar() {
-		
+		global $mysqli;
 		if ($_REQUEST["id_caracteristica"] && is_numeric($_REQUEST["id_caracteristica"])) {
 			$id = $_REQUEST["id_caracteristica"];
 		} else {
@@ -82,20 +82,20 @@ class oferta {
 		}
 		
 		$q = "SELECT orden, id_oferta FROM oferta_caracteristica WHERE id = $id";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$orden = mysql_result($r,0,0);
-			$this->id = mysql_result($r,0,1);
+		if ($r->num_rows) {
+			$orden = $rmysqli_result($r,0,0);
+			$this->id = $rmysqli_result($r,0,1);
 		} else {
 			return "0;Acceso restringido";
 		}
 		
 		$q = "DELETE FROM oferta_caracteristica WHERE id = $id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		$q = "UPDATE oferta_caracteristica SET orden = orden -1 WHERE orden > $orden AND id_oferta = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		return "1;" . $this->caracteristicas();
 		
@@ -105,7 +105,7 @@ class oferta {
 	
 	
 	function caracteristica_desplazar() {
-
+		global $mysqli;
 		
 		if ($_REQUEST["id_caracteristica"] && is_numeric($_REQUEST["id_caracteristica"])) {
 			$id = $_REQUEST["id_caracteristica"];
@@ -114,10 +114,10 @@ class oferta {
 		}
 		
 		$q = "SELECT * FROM oferta_caracteristica WHERE id = $id";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$fila = mysql_fetch_array($r);
+		if ($r->num_rows) {
+			$fila = $r->fetch_array();
 		} else {
 			return acceso_restringido();
 		}
@@ -130,18 +130,18 @@ class oferta {
 			$orden_nuevo = $fila["orden"] + 1;
 			
 			$q = "SELECT * FROM oferta_caracteristica WHERE orden = $orden_nuevo AND id_oferta = $this->id";
-			$r2 = mysql_query($q);
+			$r2 = $mysqli->query($q);
 			
-			if (mysql_num_rows($r2)) {
+			if (mysqli_num_rows($r2)) {
 				$q = "UPDATE oferta_caracteristica
 						SET orden = orden - 1
 						WHERE orden = $orden_nuevo AND id_oferta = " . $this->id;
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				$q = "UPDATE oferta_caracteristica
 						SET orden = $orden_nuevo
 						WHERE id = $id";
-				mysql_query($q);
+				$mysqli->query($q);
 				
 			}
 			
@@ -154,12 +154,12 @@ class oferta {
 				$q = "UPDATE oferta_caracteristica
 						SET orden = orden + 1
 						WHERE orden = $orden_nuevo AND id_oferta = $this->id";
-				mysql_query($q);
+				$mysqli->query($q);
  				
 				$q = "UPDATE oferta_caracteristica
 						SET orden = $orden_nuevo
 						WHERE id = $id";
-				mysql_query($q);
+				$mysqli->query($q);
 
 			}
 			
@@ -172,7 +172,7 @@ class oferta {
 	
 	
 	function caracteristica_editar() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return acceso_restringido();
 		}
@@ -181,10 +181,10 @@ class oferta {
 			$id = $_REQUEST["id_caracteristica"];
 			
 			$q = "SELECT * FROM oferta_caracteristica WHERE id = $id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)) {
-				$fila = mysql_fetch_array($r);
+			if ($r->num_rows) {
+				$fila = $r->fetch_array();
 			}
 		} 
 		
@@ -195,10 +195,10 @@ class oferta {
 						WHERE id = $id";
 			} else {
 				$q = "SELECT orden FROM oferta_caracteristica WHERE id_oferta = $this->id ORDER BY orden DESC LIMIT 1";
-				$r = mysql_query($q);
+				$r = $mysqli->query($q);
 				
-				if (mysql_num_rows($r)) {
-					$orden = mysql_result($r,0,0) + 1;
+				if ($r->num_rows) {
+					$orden = $rmysqli_result($r,0,0) + 1;
 				} else {
 					$orden = 1;
 				}
@@ -209,7 +209,7 @@ class oferta {
 				
 			}
 			
-			mysql_query($q);
+			$mysqli->query($q);
 				
 			return $this->caracteristicas();
 							
@@ -232,7 +232,7 @@ class oferta {
 	
 	
 	function desplazar() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return acceso_restringido();
 		}
@@ -256,20 +256,20 @@ class oferta {
 			$orden_nuevo = $this->datos["orden"] + 1;
 			
 			$q = "SELECT id, orden FROM oferta WHERE orden > " . $this->datos["orden"] . " AND $where ORDER BY orden DESC LIMIT 1";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 				
-			if (mysql_num_rows($r)) {
-				$fila = mysql_fetch_array($r);
+			if ($r->num_rows) {
+				$fila = $r->fetch_array();
 				
 				$q = "UPDATE oferta
 						SET orden = " . $this->datos["orden"] . "
 						WHERE " . $fila["id"];
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				$q = "UPDATE oferta 
 						SET orden = " . $fila["orden"] . "
 						WHERE id = $this->id";
-				mysql_query($q);
+				$mysqli->query($q);
 					
 			}
 				
@@ -282,21 +282,21 @@ class oferta {
 			if ($this->datos["orden"] > 1) {
 				
 				$q = "SELECT id, orden FROM oferta WHERE orden < " . $this->datos["orden"] . " AND $where ORDER BY orden DESC LIMIT 1";
-				$r = mysql_query($q);
+				$r = $mysqli->query($q);
 					
-				if (mysql_num_rows($r)) {
+				if ($r->num_rows) {
 					
-					$fila = mysql_fetch_array($r);
+					$fila = $r->fetch_array();
 					
 					$q = "UPDATE oferta
 						SET orden = " . $this->datos["orden"] . "
 						WHERE id = " . $fila["id"];
-					mysql_query($q);
+					$mysqli->query($q);
  				
 					$q = "UPDATE oferta
 							SET orden = " . $fila["orden"] . "
 							WHERE id = $this->id";
-					mysql_query($q);
+					$mysqli->query($q);
 					
 				}
 				
@@ -326,17 +326,17 @@ class oferta {
 	
 	
 	function detalle() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
 		
 		$q = "SELECT * FROM oferta_detalle WHERE id_oferta = $this->id ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$o .= "<ul class='sq'>";
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				if ($fila["precio"]) {
 					$precio = ": " . $fila["precio"];
 				}
@@ -356,7 +356,7 @@ class oferta {
 	
 	
 	function detalle_borrar() {
-		
+		global $mysqli;
 		if ($_REQUEST["id_detalle"] && is_numeric($_REQUEST["id_detalle"])) {
 			$id = $_REQUEST["id_detalle"];
 		} else {
@@ -364,20 +364,20 @@ class oferta {
 		}
 		
 		$q = "SELECT orden, id_oferta FROM oferta_detalle WHERE id = $id";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$orden = mysql_result($r,0,0);
-			$this->id = mysql_result($r,0,1);
+		if ($r->num_rows) {
+			$orden = $rmysqli_result($r,0,0);
+			$this->id = $rmysqli_result($r,0,1);
 		} else {
 			return "0;Acceso restringido";
 		}
 		
 		$q = "DELETE FROM oferta_detalle WHERE id = $id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		$q = "UPDATE oferta_detalle SET orden = orden -1 WHERE orden > $orden AND id_oferta = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		return "1;" . $this->detalle();
 		
@@ -389,7 +389,7 @@ class oferta {
 	
 	
 	function detalle_desplazar() {
-
+		global $mysqli;
 		
 		if ($_REQUEST["id_detalle"] && is_numeric($_REQUEST["id_detalle"])) {
 			$id = $_REQUEST["id_detalle"];
@@ -398,10 +398,10 @@ class oferta {
 		}
 		
 		$q = "SELECT * FROM oferta_detalle WHERE id = $id";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$fila = mysql_fetch_array($r);
+		if ($r->num_rows) {
+			$fila = $r->fetch_array();
 		} else {
 			return acceso_restringido();
 		}
@@ -414,18 +414,18 @@ class oferta {
 			$orden_nuevo = $fila["orden"] + 1;
 			
 			$q = "SELECT * FROM oferta_detalle WHERE orden = $orden_nuevo AND id_oferta = $this->id";
-			$r2 = mysql_query($q);
+			$r2 = $mysqli->query($q);
 			
-			if (mysql_num_rows($r2)) {
+			if (mysqli_num_rows($r2)) {
 				$q = "UPDATE oferta_detalle
 						SET orden = orden - 1
 						WHERE orden = $orden_nuevo AND id_oferta = " . $this->id;
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				$q = "UPDATE oferta_detalle
 						SET orden = $orden_nuevo
 						WHERE id = $id";
-				mysql_query($q);
+				$mysqli->query($q);
 				
 			}
 			
@@ -438,12 +438,12 @@ class oferta {
 				$q = "UPDATE oferta_detalle
 						SET orden = orden + 1
 						WHERE orden = $orden_nuevo AND id_oferta = $this->id";
-				mysql_query($q);
+				$mysqli->query($q);
  				
 				$q = "UPDATE oferta_detalle
 						SET orden = $orden_nuevo
 						WHERE id = $id";
-				mysql_query($q);
+				$mysqli->query($q);
 
 			}
 			
@@ -459,7 +459,7 @@ class oferta {
 	
 	
 	function detalle_editar() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return acceso_restringido();
 		}
@@ -468,10 +468,10 @@ class oferta {
 			$id = $_REQUEST["id_detalle"];
 			
 			$q = "SELECT * FROM oferta_detalle WHERE id = $id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)) {
-				$fila = mysql_fetch_array($r);
+			if ($r->num_rows) {
+				$fila = $r->fetch_array();
 			}
 		} 
 		
@@ -488,10 +488,10 @@ class oferta {
 						WHERE id = $id";
 			} else {
 				$q = "SELECT orden FROM oferta_detalle WHERE id_oferta = $this->id ORDER BY orden DESC LIMIT 1";
-				$r = mysql_query($q);
+				$r = $mysqli->query($q);
 				
-				if (mysql_num_rows($r)) {
-					$orden = mysql_result($r,0,0) + 1;
+				if ($r->num_rows) {
+					$orden = $rmysqli_result($r,0,0) + 1;
 				} else {
 					$orden = 1;
 				}
@@ -504,7 +504,7 @@ class oferta {
 				
 			}
 			
-			mysql_query($q);
+			$mysqli->query($q);
 				
 			return $this->detalle();
 							
@@ -531,7 +531,7 @@ class oferta {
 	
 	
 	function editar() {
-
+		global $mysqli;
 		if ($_REQUEST["id_oferta"]) {
 			if (is_numeric($_REQUEST["id_oferta"])) {
 				$this->id = $_REQUEST["id_oferta"];
@@ -599,21 +599,21 @@ class oferta {
 				$post->valores["fecha"] = fecha_hoy();
 				
 				$q = $post->consulta($this->id,'oferta','', $extra, 'id');
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				if (!$this->id) {
-					$this->id = mysql_insert_id();
+					$this->id = $mysqli->insert_id;
 					$this->recuperar();
 					
 					$q = "UPDATE oferta SET orden = orden + 1 WHERE orden > 0";
-					mysql_query($q);
+					$mysqli->query($q);
 					
 					$q = "UPDATE oferta SET orden = 1 WHERE id = " . $this->id;
-					mysql_query($q);
+					$mysqli->query($q);
 					
 					loggear("oferta - alta - $this->id - " . $this->datos["titulo"]);
 				} else {
-					loggear("oferta - edición - $this->id - " . $this->datos["titulo"]);
+					loggear("oferta - ediciï¿½n - $this->id - " . $this->datos["titulo"]);
 				}
 				
 				$o .= "Oferta grabada correctamente.";
@@ -683,7 +683,7 @@ class oferta {
 				 </div>
 				 <div class='tabla_td' style='width: 73%;'>
 					<div id='detalle'>" . $this->detalle() . "</div>
-					<span class='a' onclick=\"modulo(['oferta','detalle_editar','&id_oferta=$this->id','detalle_editar',0,0]);\">añadir detalle</span>
+					<span class='a' onclick=\"modulo(['oferta','detalle_editar','&id_oferta=$this->id','detalle_editar',0,0]);\">aï¿½adir detalle</span>
 					<div id='detalle_editar'></div>
 				 </div>
 				 <div style='clear: both;'></div>
@@ -691,11 +691,11 @@ class oferta {
 			
 				<div class='tabla_tr'>
 				 <div class='tabla_td' style='width: 23%; text-align: right; padding-top: 4px;'>
-				 	<strong>Características: </strong>
+				 	<strong>Caracterï¿½sticas: </strong>
 				 </div>
 				 <div class='tabla_td' style='width: 73%;'>
 					<div id='caracteristicas'>" . $this->caracteristicas() . "</div>
-					<span class='a' onclick=\"modulo(['oferta','caracteristica_editar','&id_oferta=$this->id','caracteristica_editar',0,0]);\">añadir característica</span>
+					<span class='a' onclick=\"modulo(['oferta','caracteristica_editar','&id_oferta=$this->id','caracteristica_editar',0,0]);\">aï¿½adir caracterï¿½stica</span>
 					<div id='caracteristica_editar'></div>
 				 </div>
 				 <div style='clear: both;'></div>
@@ -740,7 +740,7 @@ class oferta {
 	
 	
 	function editar_imagenes() {
-	
+		global $mysqli;
 		if (!$this->id) {
 			$o .= "<br/>Para editar las im&aacute;genes es necesario primero guardar la carta.";
 			return $o;
@@ -795,7 +795,7 @@ class oferta {
 
 	
 	function editar_imagenes_bloque() {
-		
+		global $mysqli;
 		$args = func_get_args();
 		
 		if (!$this->id) {
@@ -811,14 +811,14 @@ class oferta {
 		$q = "SELECT * 
 				FROM imagen 
 				WHERE id_imagen_tipo = 5 AND id_relacionada = " . $this->id;
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 		
 			include_once("imagen.php");
 			$imagen = new imagen();
 			
-			while ($imagen->datos = mysql_fetch_array($r)) {
+			while ($imagen->datos = $r->fetch_array()) {
 				$imagen->id = $imagen->datos["id"];
 				
 				if ($imagen->id == $this->datos["id_imagen"]) {
@@ -847,8 +847,9 @@ class oferta {
 	
 	
 	function imagen_principal() {
+		global $mysqli;
 		$q = "UPDATE oferta SET id_imagen = " . $_REQUEST["id_imagen"] . " WHERE id = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 	}
 	
 	
@@ -857,7 +858,7 @@ class oferta {
 	
 	
 	function plantilla() {
-
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
@@ -903,16 +904,16 @@ class oferta {
 	
 	
 	function plantilla_caracteristicas() {
-
+		global $mysqli;
 		$q = "SELECT * FROM oferta_caracteristica WHERE id_oferta = $this->id ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if ($num = mysql_num_rows($r)) {
+		if ($num = $r->num_rows) {
 			$num = ceil($num / 2);
 			
 			$o .= "<div class='oferta_caracteristica'><ul class='caracteristicas'>";
 			$i = 0;
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				if ($i == $num) {
 					$o .= "</ul></div><div class='oferta_caracteristica'><ul class='caracteristicas'>";
 					$i = 0;
@@ -932,14 +933,14 @@ class oferta {
 	
 	
 	function plantilla_detalle() {
-
+		global $mysqli;
 		$q = "SELECT * FROM oferta_detalle WHERE id_oferta = $this->id ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if ($num = mysql_num_rows($r)) {
+		if ($num = $r->num_rows) {
 			
 			$o .= "<div class='oferta_detalle'><ul>";
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				
 				if ($fila["precio"]) {
 					$precios .= $fila["precio"] . "&euro;<div style='height: 6px;'></div>";
@@ -960,7 +961,7 @@ class oferta {
 	
 	
 	function plantilla_resumen() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		} 
@@ -990,12 +991,13 @@ class oferta {
 	
 	
 	function recuperar() {
+		global $mysqli;
 		if ($this->id) {
 			$q = "SELECT * FROM $this->tabla WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);	
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();	
 			}
 		} else {
 			$this->datos = "";
@@ -1012,7 +1014,7 @@ class oferta {
 	
 
 	function tabla() {
-
+		global $mysqli;
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
 		}
@@ -1051,7 +1053,7 @@ class oferta {
 				ORDER BY orden ";
 			
 		}
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "
 				<input type='hidden' id='hoja' value='" . $_REQUEST["hoja"] . "'/>
@@ -1061,7 +1063,7 @@ class oferta {
 		
 		$o .= "<h3>OFERTAS $activo_oferta</h3><br/>";
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
 			
 			$o .= "
@@ -1079,7 +1081,7 @@ class oferta {
 				</div>
 			";
 			
-			while ($this->datos = mysql_fetch_array($r)) {
+			while ($this->datos = $r->fetch_array()) {
 				if (($i % 2) == 0) {
 					$clase = "tabla_par";
 				} else {
@@ -1093,7 +1095,7 @@ class oferta {
 			}
 			
 		} else {
-			$o .= error("No hay elementos en la sección.");
+			$o .= error("No hay elementos en la secciï¿½n.");
 		}
 		
 		
@@ -1111,7 +1113,7 @@ class oferta {
 	
 	
 	function tabla_fila() {
-		
+		global $mysqli;
 		$o .= "
 			<div class='tabla_td' style='width: 48%;'>
 				" . $this->datos["nombre"] . "&nbsp;

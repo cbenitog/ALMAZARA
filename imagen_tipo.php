@@ -21,16 +21,16 @@ class imagen_tipo {
 	
 	
 	function orden_max() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return 0;
 		}
 		
 		$q = "SELECT orden FROM imagen WHERE id_imagen_tipo = $this->id ORDER BY orden DESC LIMIT 1";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$orden = mysql_result($r,0,0) + 1;
+		if ($r->num_rows) {
+			$orden = $rmysqli_result($r,0,0) + 1;
 		} else {
 			$orden = 0;
 		}
@@ -43,12 +43,13 @@ class imagen_tipo {
 	
 	
 	function recuperar() {
+		global $mysqli;
 		if ($this->id) {
 			$q = "SELECT * FROM $this->tabla WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);	
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();	
 			}
 		}
 		
@@ -57,7 +58,7 @@ class imagen_tipo {
 	
 	
 	function select() {
-		
+		global $mysqli;
 		$args = func_get_args();
 		$name = $args[0];
 		$extra = $args[1];
@@ -69,11 +70,11 @@ class imagen_tipo {
 		$consulta = "SELECT *	
 						FROM imagen_tipo
 						ORDER BY id";
-		$resultado = mysql_query($consulta);
+		$resultado = $mysqli->query($consulta);
 		
-		if (mysql_num_rows($resultado)) {
+		if (mysqli_num_rows($resultado)) {
 			$select = "<select name='$name' id='$name' $extra><option value='0'></option>";
-			while ($fila = mysql_fetch_array($resultado)) {
+			while ($fila = $resultado->fetch_array()) {
 				$select .= "
 						<option value='$fila[0]'>" . stripslashes($fila['nombre']) . "</option>";
 			}

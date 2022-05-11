@@ -85,7 +85,7 @@
 	
 	
 	function loggear($texto) {
-		
+		global $mysqli;
 		if ($GLOBALS["usuario"]) {
 			$id_usuario = $GLOBALS["usuario"]->id_usuario;
 		} else {
@@ -96,7 +96,7 @@
 		
 		$consulta = "INSERT INTO log (id_usuario, texto, fecha)
 						VALUES ($id_usuario, '$texto', '$fecha')";
-		mysql_query($consulta);
+		$mysqli->query($consulta);
 		
 	}
 	
@@ -108,7 +108,7 @@
 	
 	
 	function precio($precio) {
-		
+		global $mysqli;
 				// Quitamos la parte decimal
 		$precio = round($precio,2);
 		$valores = split('\.', $precio);
@@ -359,17 +359,17 @@ function fecha_texto($fecha) {
 
 
 
-// Si el password no es válido devuelve el error, si no, no devuelve nada. 
+// Si el password no es vï¿½lido devuelve el error, si no, no devuelve nada. 
 
-// De momento los criterios para que no sea válido son: 
-//	- difiere de su validación.
+// De momento los criterios para que no sea vï¿½lido son: 
+//	- difiere de su validaciï¿½n.
 //	- es demasiado corto (menos de 6 caracteres).
-//	- es numérico. 
+//	- es numï¿½rico. 
 
 function password_valido ($password, $validacion) {
 	
 	if (is_numeric($password)) {
-		$error = "El password no puede ser numérico";
+		$error = "El password no puede ser numï¿½rico";
 		return $error;
 	}
 	
@@ -379,7 +379,7 @@ function password_valido ($password, $validacion) {
 	}
 	
 	if (strcmp($password,$validacion) <> 0) {
-		$error = "El password y su validación no son iguales";
+		$error = "El password y su validaciï¿½n no son iguales";
 		return $error;
 	}
 	
@@ -389,10 +389,10 @@ function password_valido ($password, $validacion) {
 
 
 
-//	Lo que hace es revisar todos los parámetros recibidos en el POST
+//	Lo que hace es revisar todos los parï¿½metros recibidos en el POST
 // 		y aquellos que tengan valor los coloca en una cadena lista para PRE
 
-// El primer parámetro serán aquellas variables que queremos añadir a PRE
+// El primer parï¿½metro serï¿½n aquellas variables que queremos aï¿½adir a PRE
 // 	y el segundo las qeu no queremosq ue se incluyan de las que van en POST. 
 
 function post_to_pre() {
@@ -430,7 +430,7 @@ function post_to_pre() {
 		$i += 1;
 	}
 	
-			// Ahora añadimos las que queremos
+			// Ahora aï¿½adimos las que queremos
 	$i = 0;
 	while($queremos[$i]) {
 		if ($no_inicio) {
@@ -489,7 +489,7 @@ function radio_boolean() {
 	
 	$select = "	<input type='radio' name='$name' value='0'>No
 					&nbsp;
-				<input type='radio' name='$name' value='1'>Sí
+				<input type='radio' name='$name' value='1'>Sï¿½
 				";
 					
 	if (isset($valor)) {
@@ -674,21 +674,21 @@ function select_anyo() {
 
 
 function select_provincia($nombre, $valor) {
-
+	global $mysqli;
 				// Recuperamos los grupos de la base de datos
 	$consulta = "SELECT id_provincia, nombre	
 						FROM provincia
 						ORDER BY nombre
 						";
-	$resultado = mysql_query($consulta);
+	$resultado = $mysqli->query($consulta);
 		
 	$select = "
 			<select id='$nombre' name='$nombre' onchange='poblacion_elegir();'>
 					<option value=''></option>
 					";
 		
-	if (mysql_num_rows($resultado)) {
-		while ($fila = mysql_fetch_array($resultado)) {
+	if (mysqli_num_rows($resultado)) {
+		while ($fila = $resultado->fetch_array()) {
 			$select .= "
 				<option value='$fila[0]'>" . stripslashes($fila[1]) . "</option>";
 		}
@@ -711,7 +711,7 @@ function select_provincia($nombre, $valor) {
 
 
 function select_puntero($total,$numero,$seleccionado) {
-	
+	global $mysqli;
 	$parametros = func_get_args();
 	
 	if ($parametros[3]) {
@@ -761,7 +761,7 @@ function select_puntero($total,$numero,$seleccionado) {
 
 
 function tratar_variables(&$variables) {
-
+	global $mysqli;
 	$i = 0;
 
 	$keys = array_keys($variables);
@@ -777,7 +777,7 @@ function tratar_variables(&$variables) {
 			if (($variables[$i][1] == "string") && ($valor == "")) {
 				$error_obligatorio = 1; 
 			} else if (($variables[$i][1]== "int") && ($valor == 0)) {
-							// apaño cutre
+							// apaï¿½o cutre
 				if (($var == "coche")) {
 					$error_obligatorio = 0;
 				} else {
@@ -810,7 +810,7 @@ function tratar_variables(&$variables) {
 				} else {
 					$variables[$i][3] = "";
 					$variables[$i][4] = 1;
-					$error = "Valor no válido en $var";
+					$error = "Valor no vï¿½lido en $var";
 				}
 				
 				
@@ -825,7 +825,7 @@ function tratar_variables(&$variables) {
 				} else {
 					$variables[$i][3] = "";
 					$variables[$i][4] = 1;
-					$error = "Valor no válido en $var";
+					$error = "Valor no vï¿½lido en $var";
 				}
 				
 				
@@ -839,7 +839,7 @@ function tratar_variables(&$variables) {
 				} else {
 					$variables[$i][3] = "";
 					$variables[$i][4] = 1;
-					$error = "Fecha no válida en $var";
+					$error = "Fecha no vï¿½lida en $var";
 				}
 					
 			
@@ -851,7 +851,7 @@ function tratar_variables(&$variables) {
 				} else {
 					$variables[$i][3] = "";
 					$variables[$i][4] = 1;
-					$error = "Valor no válido en $var";
+					$error = "Valor no vï¿½lido en $var";
 				}
 					
 			
@@ -865,7 +865,7 @@ function tratar_variables(&$variables) {
 				} else {
 					$variables[$i][3] = "";
 					$variables[$i][4] = 1;
-					$error = "Valor no válido en $var";
+					$error = "Valor no vï¿½lido en $var";
 				}
 					
 			}

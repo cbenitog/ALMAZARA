@@ -22,7 +22,7 @@ class actividad {
 	
 
 	function borrar() {
-
+		global $mysqli;
 		if ($_REQUEST["id_actividad"] && is_numeric($_REQUEST["id_actividad"])) {
 			$this->id = $_REQUEST["id_actividad"];
 			$this->recuperar();
@@ -34,10 +34,10 @@ class actividad {
 				SET orden = orden - 1
 				WHERE id_carta = " . $this->datos["id_carta"] . "
 					AND orden > " . $this->datos["orden"];
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		$q = "DELETE FROM actividad WHERE id = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		loggear("actividad - borrar - " . $this->datos["nombre"]);
 		
@@ -50,7 +50,7 @@ class actividad {
 	
 
 	function desplazar() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return acceso_restringido();
 		}
@@ -66,12 +66,12 @@ class actividad {
 				$q = "UPDATE actividad
 						SET orden = orden - 1
 						WHERE orden = $orden_nuevo";
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				$q = "UPDATE actividad 
 						SET orden = $orden_nuevo
 						WHERE id = $this->id";
-				mysql_query($q);
+				$mysqli->query($q);
 				
 			}
 			
@@ -84,12 +84,12 @@ class actividad {
 				$q = "UPDATE actividad
 						SET orden = orden + 1
 						WHERE orden = $orden_nuevo ";
-				mysql_query($q);
+				$mysqli->query($q);
  				
 				$q = "UPDATE actividad
 						SET orden = $orden_nuevo
 						WHERE id = $this->id";
-				mysql_query($q);
+				$mysqli->query($q);
 				
 			}
 			
@@ -106,7 +106,7 @@ class actividad {
 	
 	
 	function editar() {
-
+		global $mysqli;
 		if ($_REQUEST["id_actividad"]) {
 			if (is_numeric($_REQUEST["id_actividad"])) {
 				$this->id = $_REQUEST["id_actividad"];
@@ -171,21 +171,21 @@ class actividad {
 			
 				
 				$q = $post->consulta($this->id,'actividad','', $extra, 'id');
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				if (!$this->id) {
-					$this->id = mysql_insert_id();
+					$this->id = $mysqli->insert_id;
 					$this->recuperar();
 					
 					$q = "UPDATE actividad
 							SET orden = " . $this->orden_max() . " 
 							WHERE id = $this->id";
-					mysql_query($q);
+					$mysqli->query($q);
 					
 					
 					loggear("actividad - alta - $this->id - " . $this->datos["titulo"]);
 				} else {
-					loggear("actividad - edición - $this->id - " . $this->datos["titulo"]);
+					loggear("actividad - ediciï¿½n - $this->id - " . $this->datos["titulo"]);
 				}
 				
 				$o .= "Elemento grabado correctamente.";
@@ -253,7 +253,7 @@ class actividad {
 	
 	
 	function editar_imagenes() {
-	
+		global $mysqli;
 		if (!$this->id) {
 			$o .= "<br/>Para editar las im&aacute;genes es necesario primero guardar la carta.";
 			return $o;
@@ -308,7 +308,7 @@ class actividad {
 
 	
 	function editar_imagenes_bloque() {
-		
+		global $mysqli;
 		$args = func_get_args();
 		
 		if (!$this->id) {
@@ -325,14 +325,14 @@ class actividad {
 				FROM imagen 
 					INNER JOIN actividad ON actividad.id_imagen = imagen.id 
 				WHERE actividad.id = " . $this->id;
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 		
 			include_once("imagen.php");
 			$imagen = new imagen();
 			
-			while ($imagen->datos = mysql_fetch_array($r)) {
+			while ($imagen->datos = $r->fetch_array()) {
 				$imagen->id = $imagen->datos["id"];
 				
 				if ($imagen->id == $this->datos["id_imagen"]) {
@@ -372,12 +372,12 @@ class actividad {
 	
 	
 	function orden_max() {
-		
+		global $mysqli;
 		$q = "SELECT orden FROM actividad ORDER BY orden DESC LIMIT 1";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$orden = mysql_result($r,0,0)  + 1;
+		if ($r->num_rows) {
+			$orden = $rmysqli_result($r,0,0)  + 1;
 		} else {
 			$orden = 1;
 		}
@@ -394,7 +394,7 @@ class actividad {
 		
 	
 	function plantilla() {
-		
+		global $mysqli;
 		$imagen = new imagen();
 		$imagen->id = $this->datos["id_imagen"];
 		$imagen->recuperar();
@@ -412,12 +412,13 @@ class actividad {
 	
 	
 	function recuperar() {
+		global $mysqli;
 		if ($this->id) {
 			$q = "SELECT * FROM $this->tabla WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);	
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();	
 			}
 		} else {
 			$this->datos = "";
@@ -430,7 +431,7 @@ class actividad {
 	
 
 	function tabla() {
-
+		global $mysqli;
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
 		}
@@ -460,7 +461,7 @@ class actividad {
 				FROM actividad 
 				WHERE activo = $activo
 				ORDER BY orden ";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "
 				<input type='hidden' id='hoja' value='" . $_REQUEST["hoja"] . "'/>
@@ -470,7 +471,7 @@ class actividad {
 		
 		$o .= "<h3>ELEMENTOS $activo_actividad</h3><br/>";
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
 			
 			$o .= "
@@ -485,7 +486,7 @@ class actividad {
 				</div>
 			";
 			
-			while ($this->datos = mysql_fetch_array($r)) {
+			while ($this->datos = $r->fetch_array()) {
 				if (($i % 2) == 0) {
 					$clase = "tabla_par";
 				} else {
@@ -499,7 +500,7 @@ class actividad {
 			}
 			
 		} else {
-			$o .= error("No hay elementos en la sección.");
+			$o .= error("No hay elementos en la secciï¿½n.");
 		}
 		
 		
@@ -517,7 +518,7 @@ class actividad {
 	
 	
 	function tabla_fila() {
-		
+		global $mysqli;
 		$o .= "
 			<div class='tabla_td' style='width: 48%;'>
 				" . $this->datos["texto"] . "&nbsp;

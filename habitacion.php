@@ -20,7 +20,7 @@ class habitacion {
 	
 	
 	function borrar() {
-
+		global $mysqli;
 		if ($_REQUEST["id_habitacion"] && is_numeric($_REQUEST["id_habitacion"])) {
 			$this->id = $_REQUEST["id_habitacion"];
 			$this->recuperar();
@@ -32,10 +32,10 @@ class habitacion {
 				SET orden = orden - 1
 				WHERE id_tipo = " . $this->datos["id_tipo"] . "
 					AND orden > " . $this->datos["orden"];
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		$q = "DELETE FROM habitacion WHERE id = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		loggear("habitacion - borrar - " . $this->datos["nombre"]);
 		
@@ -46,7 +46,7 @@ class habitacion {
 	
 	
 	function boton() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
@@ -69,17 +69,17 @@ class habitacion {
 	
 	
 	function caracteristicas() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
 		
 		$q = "SELECT * FROM habitacion_caracteristica WHERE id_habitacion = $this->id ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$o .= "<ul class='sq'>";
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				$o .= "<li class='sq'>" . $fila["texto"] . " 
 					<span class='a' onclick=\"modulo(['habitacion','caracteristica_editar','&id_habitacion=$this->id&id_caracteristica=" . $fila["id"] . "', 'caracteristica_editar',0,0]);\">editar</span>
 					<span class='a' onclick=\"modulo(['habitacion','caracteristica_desplazar','&desp=-1&id_caracteristica=" . $fila["id"] . "', 'caracteristicas',0,0]);\">subir</span>
@@ -96,7 +96,7 @@ class habitacion {
 	
 	
 	function caracteristica_borrar() {
-		
+		global $mysqli;
 		if ($_REQUEST["id_caracteristica"] && is_numeric($_REQUEST["id_caracteristica"])) {
 			$id = $_REQUEST["id_caracteristica"];
 		} else {
@@ -104,20 +104,20 @@ class habitacion {
 		}
 		
 		$q = "SELECT orden, id_habitacion FROM habitacion_caracteristica WHERE id = $id";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$orden = mysql_result($r,0,0);
-			$this->id = mysql_result($r,0,1);
+		if ($r->num_rows) {
+			$orden = $rmysqli_result($r,0,0);
+			$this->id = $rmysqli_result($r,0,1);
 		} else {
 			return "0;Acceso restringido";
 		}
 		
 		$q = "DELETE FROM habitacion_caracteristica WHERE id = $id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		$q = "UPDATE habitacion_caracteristica SET orden = orden -1 WHERE orden > $orden AND id_habitacion = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		return "1;" . $this->caracteristicas();
 		
@@ -126,7 +126,7 @@ class habitacion {
 	
 	
 	function caracteristica_desplazar() {
-
+		global $mysqli;
 		
 		if ($_REQUEST["id_caracteristica"] && is_numeric($_REQUEST["id_caracteristica"])) {
 			$id = $_REQUEST["id_caracteristica"];
@@ -135,10 +135,10 @@ class habitacion {
 		}
 		
 		$q = "SELECT * FROM habitacion_caracteristica WHERE id = $id";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$fila = mysql_fetch_array($r);
+		if ($r->num_rows) {
+			$fila = $r->fetch_array();
 		} else {
 			return acceso_restringido();
 		}
@@ -151,18 +151,18 @@ class habitacion {
 			$orden_nuevo = $fila["orden"] + 1;
 			
 			$q = "SELECT * FROM habitacion_caracteristica WHERE orden = $orden_nuevo AND id_habitacion = $this->id";
-			$r2 = mysql_query($q);
+			$r2 = $mysqli->query($q);
 			
-			if (mysql_num_rows($r2)) {
+			if (mysqli_num_rows($r2)) {
 				$q = "UPDATE habitacion_caracteristica
 						SET orden = orden - 1
 						WHERE orden = $orden_nuevo AND id_habitacion = " . $this->id;
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				$q = "UPDATE habitacion_caracteristica
 						SET orden = $orden_nuevo
 						WHERE id = $id";
-				mysql_query($q);
+				$mysqli->query($q);
 				
 			}
 			
@@ -175,12 +175,12 @@ class habitacion {
 				$q = "UPDATE habitacion_caracteristica
 						SET orden = orden + 1
 						WHERE orden = $orden_nuevo AND id_habitacion = $this->id";
-				mysql_query($q);
+				$mysqli->query($q);
  				
 				$q = "UPDATE habitacion_caracteristica
 						SET orden = $orden_nuevo
 						WHERE id = $id";
-				mysql_query($q);
+				$mysqli->query($q);
 
 			}
 			
@@ -194,7 +194,7 @@ class habitacion {
 	
 	
 	function caracteristica_editar() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return acceso_restringido();
 		}
@@ -203,10 +203,10 @@ class habitacion {
 			$id = $_REQUEST["id_caracteristica"];
 			
 			$q = "SELECT * FROM habitacion_caracteristica WHERE id = $id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)) {
-				$fila = mysql_fetch_array($r);
+			if ($r->num_rows) {
+				$fila = $r->fetch_array();
 			}
 		} 
 		
@@ -217,10 +217,10 @@ class habitacion {
 						WHERE id = $id";
 			} else {
 				$q = "SELECT orden FROM habitacion_caracteristica WHERE id_habitacion = $this->id ORDER BY orden DESC LIMIT 1";
-				$r = mysql_query($q);
+				$r = $mysqli->query($q);
 				
-				if (mysql_num_rows($r)) {
-					$orden = mysql_result($r,0,0) + 1;
+				if ($r->num_rows) {
+					$orden = $rmysqli_result($r,0,0) + 1;
 				} else {
 					$orden = 1;
 				}
@@ -231,7 +231,7 @@ class habitacion {
 				
 			}
 			
-			mysql_query($q);
+			$mysqli->query($q);
 				
 			return $this->caracteristicas();
 							
@@ -251,7 +251,7 @@ class habitacion {
 	
 
 	function desplazar() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return acceso_restringido();
 		}
@@ -267,12 +267,12 @@ class habitacion {
 				$q = "UPDATE habitacion
 						SET orden = orden - 1
 						WHERE orden = $orden_nuevo AND id_tipo = " . $this->datos["id_tipo"];
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				$q = "UPDATE habitacion 
 						SET orden = $orden_nuevo
 						WHERE id = $this->id";
-				mysql_query($q);
+				$mysqli->query($q);
 				
 			}
 			
@@ -285,12 +285,12 @@ class habitacion {
 				$q = "UPDATE habitacion
 						SET orden = orden + 1
 						WHERE orden = $orden_nuevo AND id_tipo = " . $this->datos["id_tipo"];
-				mysql_query($q);
+				$mysqli->query($q);
  				
 				$q = "UPDATE habitacion
 						SET orden = $orden_nuevo
 						WHERE id = $this->id";
-				mysql_query($q);
+				$mysqli->query($q);
 				
 			}
 			
@@ -311,7 +311,7 @@ class habitacion {
 	
 	
 	function editar() {
-
+		global $mysqli;
 		if ($_REQUEST["id_habitacion"]) {
 			if (is_numeric($_REQUEST["id_habitacion"])) {
 				$this->id = $_REQUEST["id_habitacion"];
@@ -380,24 +380,24 @@ class habitacion {
 			
 				
 				$q = $post->consulta($this->id,'habitacion','', $extra, 'id');
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				if (!$this->id) {
-					$this->id = mysql_insert_id();
+					$this->id = $mysqli->insert_id;
 					$this->recuperar();
 					
 					$q = "UPDATE habitacion
 							SET orden = " . $this->orden_max() . " 
 							WHERE id = $this->id";
-					mysql_query($q);
+					$mysqli->query($q);
 					
 					
 					loggear("habitacion - alta - $this->id - " . $this->datos["titulo"]);
 				} else {
-					loggear("habitacion - edición - $this->id - " . $this->datos["titulo"]);
+					loggear("habitacion - ediciï¿½n - $this->id - " . $this->datos["titulo"]);
 				}
 				
-				$o .= "Habitación grabada correctamente.";
+				$o .= "Habitaciï¿½n grabada correctamente.";
 				
 				return $o;
 			}	
@@ -465,11 +465,11 @@ class habitacion {
 			$o .= "
 				<div class='tabla_tr'>
 				 <div class='tabla_td' style='width: 23%; text-align: right; padding-top: 4px;'>
-				 	<strong>Características: </strong>
+				 	<strong>Caracterï¿½sticas: </strong>
 				 </div>
 				 <div class='tabla_td' style='width: 73%;'>
 					<div id='caracteristicas'>" . $this->caracteristicas() . "</div>
-					<span class='a' onclick=\"modulo(['habitacion','caracteristica_editar','&id_habitacion=$this->id','caracteristica_editar',0,0]);\">añadir característica</span>
+					<span class='a' onclick=\"modulo(['habitacion','caracteristica_editar','&id_habitacion=$this->id','caracteristica_editar',0,0]);\">aï¿½adir caracterï¿½stica</span>
 					<div id='caracteristica_editar'></div>
 				 </div>
 				 <div style='clear: both;'></div>
@@ -511,7 +511,7 @@ class habitacion {
 	
 	
 	function editar_imagenes() {
-	
+		global $mysqli;
 		if (!$this->id) {
 			$o .= "<br/>Para editar las im&aacute;genes es necesario primero guardar la carta.";
 			return $o;
@@ -566,7 +566,7 @@ class habitacion {
 
 	
 	function editar_imagenes_bloque() {
-		
+		global $mysqli;
 		$args = func_get_args();
 		
 		if (!$this->id) {
@@ -582,14 +582,14 @@ class habitacion {
 		$q = "SELECT * 
 				FROM imagen 
 				WHERE id_imagen_tipo = 4 AND id_relacionada = " . $this->id;
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 		
 			include_once("imagen.php");
 			$imagen = new imagen();
 			
-			while ($imagen->datos = mysql_fetch_array($r)) {
+			while ($imagen->datos = $r->fetch_array()) {
 				$imagen->id = $imagen->datos["id"];
 				
 				if ($imagen->id == $this->datos["id_imagen"]) {
@@ -617,7 +617,7 @@ class habitacion {
 	
 	
 	function foto() {
-		
+		global $mysqli;
 		if ($_REQUEST["id_imagen"] && is_numeric($_REQUEST["id_imagen"])) {
 			include_once("imagen.php");
 			$imagen = new imagen();
@@ -641,8 +641,9 @@ class habitacion {
 	
 	
 	function imagen_principal() {
+		global $mysqli;
 		$q = "UPDATE habitacion SET id_imagen = " . $_REQUEST["id_imagen"] . " WHERE id = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 	}
 	
 	
@@ -650,7 +651,7 @@ class habitacion {
 		
 	
 	function orden_max() {
-		
+		global $mysqli;
 		if ($this->datos["id_tipo"]) {
 			$id_tipo = $this->datos["id_tipo"];
 		} else {
@@ -658,10 +659,10 @@ class habitacion {
 		}
 		
 		$q = "SELECT orden FROM actividad WHERE id_tipo = " . $id_tipo . " ORDER BY orden DESC LIMIT 1";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$orden = mysql_result($r,0,0)  + 1;
+		if ($r->num_rows) {
+			$orden = $rmysqli_result($r,0,0)  + 1;
 		} else {
 			$orden = 1;
 		}
@@ -677,7 +678,7 @@ class habitacion {
 	
 	
 	function plantilla() {
-		
+		global $mysqli;
 		if (!$this->id) {
 			return;
 		}
@@ -706,11 +707,11 @@ class habitacion {
 						";
 		
 		$q = "SELECT * FROM imagen WHERE id_imagen_tipo = 4 AND id_relacionada = $this->id ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$o .= "<div class='habitacion_thumbs'>";
-			while ($imagen->datos = mysql_fetch_array($r)) {
+			while ($imagen->datos = $r->fetch_array()) {
 				$imagen->id = $imagen->datos["id"];
 				
 				$o .= "<div class='cursor habitacion_thumb'><a class='colorbox' rel='gal' href='" . $imagen->enlace() . "' onmouseover=\"modulo(['habitacion','foto','&id_imagen=$imagen->id','habitacion_foto',0,0]);return false;\">" . $imagen->thumb(51,51) . "</a></div>";
@@ -759,16 +760,16 @@ class habitacion {
 	
 	
 	function plantilla_caracteristicas() {
-		
+		global $mysqli;
 		$q = "SELECT * FROM habitacion_caracteristica WHERE id_habitacion = $this->id ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if ($num = mysql_num_rows($r)) {
+		if ($num = $r->num_rows) {
 			$num = ceil($num / 2);
 			
 			$o .= "<div class='habitacion_caracteristica'><ul>";
 			$i = 0;
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				if ($i == $num) {
 					$o .= "</ul></div><div class='habitacion_caracteristica'><ul>";
 					$i = 0;
@@ -791,7 +792,7 @@ class habitacion {
 	
 	
 	function plantilla_resumen() {
-		
+		global $mysqli;
 		include_once("imagen.php");
 		$imagen = new imagen();
 		$imagen->id = $this->datos["id_imagen"];
@@ -823,12 +824,13 @@ class habitacion {
 	
 	
 	function recuperar() {
+		global $mysqli;
 		if ($this->id) {
 			$q = "SELECT * FROM $this->tabla WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);	
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();	
 			}
 		} else {
 			$this->datos = "";
@@ -850,7 +852,7 @@ class habitacion {
 	
 
 	function tabla() {
-
+		global $mysqli;
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
 		}
@@ -901,23 +903,23 @@ class habitacion {
 				FROM habitacion 
 				WHERE id_tipo= $id_tipo AND activo = $activo
 				ORDER BY orden ";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "
 				<input type='hidden' id='hoja' value='" . $_REQUEST["hoja"] . "'/>
-				<input type='button' value='NUEVA HABITACIÓN' onclick=\"modulo(['habitacion', 'editar', '', 'bloque2_trabajo', 0, 0]);\" style='float: right; margin: 5px 2px 5px 2px;'/>
+				<input type='button' value='NUEVA HABITACIï¿½N' onclick=\"modulo(['habitacion', 'editar', '', 'bloque2_trabajo', 0, 0]);\" style='float: right; margin: 5px 2px 5px 2px;'/>
 				$boton_activo
 			";
 		
 		$o .= "<h3>HABITACIONES $activo_habitacion</h3><br/>";
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
 			
 			$o .= "
 				<div class='tabla_cabecera'>	
 				<div class='tabla_th' style='width: 50%;'>
-					HABITACIÓN
+					HABITACIï¿½N
 				</div>
 				<div class='tabla_th' style='width: 50%;'>
 					&nbsp; 
@@ -926,7 +928,7 @@ class habitacion {
 				</div>
 			";
 			
-			while ($this->datos = mysql_fetch_array($r)) {
+			while ($this->datos = $r->fetch_array()) {
 				if (($i % 2) == 0) {
 					$clase = "tabla_par";
 				} else {
@@ -940,7 +942,7 @@ class habitacion {
 			}
 			
 		} else {
-			$o .= error("No hay elementos en la sección.");
+			$o .= error("No hay elementos en la secciï¿½n.");
 		}
 		
 		
@@ -967,7 +969,7 @@ class habitacion {
 				<span class='a' onclick=\"modulo(['habitacion', 'editar', '&id_habitacion=$this->id', 'bloque2_trabajo', 0,0]);\">editar</span>
 				<span class='a' onclick=\"modulo(['habitacion', 'desplazar', '&desp=-1&id_habitacion=$this->id', 'tabla_habitacion', 0,0]);\">subir</span>
 				<span class='a' onclick=\"modulo(['habitacion', 'desplazar', '&desp=1&id_habitacion=$this->id', 'tabla_habitacion', 0,0]);\">bajar</span>
-				<span class='a' onclick=\"confirmacion(['Borrar habitación','habitacion', 'borrar', '&id_habitacion=$this->id', 'tabla_habitacion', 0, 0]);\">borrar</span>
+				<span class='a' onclick=\"confirmacion(['Borrar habitaciï¿½n','habitacion', 'borrar', '&id_habitacion=$this->id', 'tabla_habitacion', 0, 0]);\">borrar</span>
 			</div>
 			<div style='clear:both;'></div>
 		";

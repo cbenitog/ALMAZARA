@@ -27,7 +27,8 @@ class seccion {
 
 	
 	function editar() {
-
+		 
+		global $mysqli;
 		if (!$this->id) {
 			return acceso_restringido();
 		}
@@ -70,14 +71,14 @@ class seccion {
 			
 				
 				$q = $post->consulta($this->id,'seccion','', $extra, 'id');
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				if (!$this->id) {
-					$this->id = mysql_insert_id();
+					$this->id = $mysqli->insert_id;
 					$this->recuperar();
 					loggear("seccion - alta - $this->id - " . $this->datos["titulo"]);
 				} else {
-					loggear("sección - edición - $this->id - " . $this->datos["titulo"]);
+					loggear("secciï¿½n - ediciï¿½n - $this->id - " . $this->datos["titulo"]);
 				}
 				
 				$o .= "Secci&oacute;n grabada correctamente.";
@@ -138,12 +139,14 @@ class seccion {
 	
 	
 	function recuperar() {
+		global $mysqli;
+		 
 		if ($this->id) {
 			$q = "SELECT * FROM $this->tabla WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);	
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();	
 			}
 		}
 		
@@ -154,12 +157,13 @@ class seccion {
 	
 	
 	function seccion($nombre) {
-		
+		global $mysqli;
+		 
 		$q = "SELECT id FROM seccion WHERE nombre like '$nombre'";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$this->id = mysql_result($r,0,0);
+		if ($r->num_rows) {
+			$this->id = mysqli_result($r, 0,0);
 			$this->recuperar();
 		}
 		return $this->id;
@@ -172,7 +176,9 @@ class seccion {
 	
 	
 	function select() {
-		
+		global $mysqli;
+		 
+
 		$args = func_get_args();
 		$name = $args[0];
 		$extra = $args[1];
@@ -184,11 +190,11 @@ class seccion {
 		$consulta = "SELECT *	
 						FROM seccion
 						ORDER BY id";
-		$resultado = mysql_query($consulta);
+		$resultado = $mysqli->query($consulta);
 		
-		if (mysql_num_rows($resultado)) {
+		if (mysqli_num_rows($resultado)) {
 			$select = "<select name='$name' id='$name' $extra><option value='0'></option>";
-			while ($fila = mysql_fetch_array($resultado)) {
+			while ($fila = $resultado->fetch_array()) {
 				$select .= "
 						<option value='$fila[0]'>" . stripslashes($fila['nombre']) . "</option>";
 			}
@@ -209,6 +215,8 @@ class seccion {
 	
 
 	function tabla() {
+		global $mysqli;
+		 
 
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
@@ -229,13 +237,13 @@ class seccion {
 				FROM seccion 
 				WHERE id_padre = 0
 				ORDER BY orden";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
 		$o .= "
 				<input type='hidden' id='hoja' value='" . $_REQUEST["hoja"] . "'/>
 		";
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
 			
 			$o .= "
@@ -257,7 +265,7 @@ class seccion {
 				</div>
 			";
 			
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				if (($i % 2) == 0) {
 					$clase = "tabla_par";
 				} else {
@@ -271,10 +279,10 @@ class seccion {
 				$o .= "<div class='tabla_tr $clase'>" . $this->tabla_fila() . "</div>";
 				
 				$q2 = "SELECT * FROM seccion WHERE id_padre = " . $fila["id"] . " ORDER BY orden";
-				$r2 = mysql_query($q2);
+				$r2 = $mysqli->query($q2);
 				
-				if (mysql_num_rows($r2)) {
-					while ($this->datos = mysql_fetch_array($r2)) {
+				if (mysqli_num_rows($r2)) {
+					while ($this->datos = $r2->fetch_array()) {
 						$this->id = $this->datos["id"];
 						$this->subtitulo = $this->datos["titulo"];
 						$o .= "<div class='tabla_tr $clase'>" . $this->tabla_fila() . "</div>";
@@ -304,7 +312,7 @@ class seccion {
 	
 	
 	function tabla_fila() {
-		
+		global $mysqli;
 		if ($this->datos["activo"]) {
 			$activo = "&nbsp;";
 		} else {

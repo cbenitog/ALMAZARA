@@ -27,9 +27,9 @@ class usuario {
 					FROM sesion 
 						WHERE id_sesion = $cookie_sesion 
 							AND hash = '$cookie_hash'";
-			$r = mysql_query($q);
-	    	if (mysql_num_rows($r)) {
-	    		$fila = mysql_fetch_array($r);
+			$r = $mysqli->query($q);
+	    	if ($r->num_rows) {
+	    		$fila = $r->fetch_array();
 	    		if ($fila["hash"] == $cookie_hash) {
 	    			if ($fila["id_usuario"]) {
 		    			$this->id_usuario = $fila["id_usuario"];
@@ -61,7 +61,7 @@ class usuario {
 
 
 	function editar() {
-
+		 
 		if ($_REQUEST["id_usuario"]) {
 			if (is_numeric($_REQUEST["id_usuario"])) {
 				$this->id_usuario = $_REQUEST["id_usuario"];
@@ -127,20 +127,20 @@ class usuario {
 				
 			
 				$q = $post->consulta($this->id_usuario,'usuario','', $extra, 'id_usuario');
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				if ($password) {
 					$q = "UPDATE usuario SET password = '$password' WHERE id_usuario = $this->id_usuario";
-					mysql_query($q);
+					$mysqli->query($q);
 				}
 				
 				if (!$this->id_usuario) {
-					$this->id_usuario = mysql_insert_id();
+					$this->id_usuario = $mysqli->insert_id;
 					
 					$this->recuperar();
 					loggear("usuario - alta - $this->id_usuario - " . $this->datos["titulo"]);
 				} else {
-					loggear("usuario - edición - $this->id_usuario - " . $this->datos["titulo"]);
+					loggear("usuario - ediciï¿½n - $this->id_usuario - " . $this->datos["titulo"]);
 				}
 				
 				$o .= "Usuario grabado correctamente.";
@@ -194,7 +194,7 @@ class usuario {
 			
 			<div class='tabla_tr'>
 			 <div class='tabla_td' style='width: 23%; text-align: right; '>
-			 	<strong>Contraseña:</strong>
+			 	<strong>Contraseï¿½a:</strong>
 			 </div>
 			 <div class='tabla_td' style='width: 73%;'>
 				<input type='password' class='todo' id='password' name='password' value=''/>
@@ -204,7 +204,7 @@ class usuario {
 
 			<div class='tabla_tr'>
 			 <div class='tabla_td' style='width: 23%; text-align: right; '>
-			 	<strong>Confirmaci&oacute;n de contraseña:</strong>
+			 	<strong>Confirmaci&oacute;n de contraseï¿½a:</strong>
 			 </div>
 			 <div class='tabla_td' style='width: 73%;'>
 				<input type='password' class='todo' id='password2' name='password2' value=''/>
@@ -241,15 +241,15 @@ class usuario {
 		if ($cookie_sesion) {
 	
 		    $cadena = "SELECT * FROM sesion WHERE id_sesion = " . $cookie_sesion;
-		    $resultado = mysql_query($cadena);
+		    $resultado = $mysqli->query($cadena);
 		    
 		    if (mysql_errno())	return;
 		
-		    if (mysql_num_rows($resultado) == 0 ) {
+		    if (mysqli_num_rows($resultado) == 0 ) {
 		    	return;
 		    };
 		
-		    $fila_indice = mysql_fetch_array($resultado);
+		    $fila_indice = $resultado->fetch_array();
 		    
 		    	// tenemos que comprobar si el hash es el mismo
 		    if ($fila_indice["hash"] == $cookie_hash) {
@@ -277,7 +277,7 @@ class usuario {
 			
 	    if ($_COOKIE["almazara_sesion"] <> "") {
 	    	$this->error = 1;
-	    	$this->error_texto = "Existe una sesión previa. Por favor, haz <a href='logout.php?'>logout</a> primero.";
+	    	$this->error_texto = "Existe una sesiï¿½n previa. Por favor, haz <a href='logout.php?'>logout</a> primero.";
 	    	return;
 		}
 	
@@ -302,20 +302,20 @@ class usuario {
 	        
 	        if (mysql_errno()) {
 	        	$this->error = 3;
-	        	$this->error_texto = "Error en la búsqueda de usuarios.";
+	        	$this->error_texto = "Error en la bï¿½squeda de usuarios.";
 	        	return;
 	        }
 	
 	//  Si existe el usuario comprobamos el password
-	        if (mysql_num_rows($resultado)) {
-	            $fila_indice = mysql_fetch_array($resultado);
+	        if (mysqli_num_rows($resultado)) {
+	            $fila_indice = $resultado->fetch_array();
 	
 	            $id_usuario = $fila_indice[0];
 	            $pass2 = $fila_indice[1];
 
 	            if (!$fila_indice[2]) {
 	            	$this->error = 5;
-		            $this->error_texto = "El usuario no está activado.";
+		            $this->error_texto = "El usuario no estï¿½ activado.";
 		            return;
 	            }
 	            
@@ -324,12 +324,12 @@ class usuario {
 	            	$password = md5($password);
 	            
 		            if (strcmp($password,$pass2) == 0) {
-		                                                // Se ha reconocido el password de forma que creamos la sesión en la tabla
-		                                                // y la cookie con los datos de la sesión
-		                                                        // la comparación de password no ha sido válida
+		                                                // Se ha reconocido el password de forma que creamos la sesiï¿½n en la tabla
+		                                                // y la cookie con los datos de la sesiï¿½n
+		                                                        // la comparaciï¿½n de password no ha sido vï¿½lida
 		             } else {
 		             	$this->error = 5;
-		             	$this->error_texto = "La contraseña no es correcta.";
+		             	$this->error_texto = "La contraseï¿½a no es correcta.";
 		             	return;
 		             }
 	            }
@@ -337,7 +337,7 @@ class usuario {
 	            $hash = md5(time() * rand());
 	            
 	            $q = "DELETE FROM sesion WHERE id_usuario = $id_usuario AND fecha < '" . fecha_hoy() . "'";
-	            $r = mysql_query($q);
+	            $r = $mysqli->query($q);
 	            
                 $cadena = "INSERT INTO sesion 
                 				(id_usuario, hash, fecha) 
@@ -345,16 +345,16 @@ class usuario {
                 $resultado = mysql_query ($cadena);
                 if (mysql_errno()) {
                 	$this->error = 6;
-                	$this->error_texto = "Error en la creación de la sesión $cadena";
+                	$this->error_texto = "Error en la creaciï¿½n de la sesiï¿½n $cadena";
                 	return;
                 }
-                                        //          tenemos que recuperar el número de la sesión
-                $id_sesion = mysql_insert_id();
+                                        //          tenemos que recuperar el nï¿½mero de la sesiï¿½n
+                $id_sesion = $mysqli->insert_id;
                 
                 $q = "UPDATE usuario
                 		SET ultimo_login = '$fecha' 
                 		WHERE id_usuario= $id_usuario ";
-                mysql_query($q);
+                $mysqli->query($q);
 
 
                 $GLOBALS["usuario"] = new usuario();
@@ -414,10 +414,10 @@ class usuario {
 	function recuperar() {
 		if ($this->id_usuario) {
 			$q = "SELECT * FROM usuario WHERE id_usuario = $this->id_usuario";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();
 			}
 		}
 		
@@ -453,9 +453,9 @@ class usuario {
 				FROM usuario 
 				ORDER BY id_usuario
 				LIMIT $puntero, $num_filas";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
 			
 			$o .= "
@@ -476,7 +476,7 @@ class usuario {
 				</div>
 			";
 			
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 				if (($i % 2) == 0) {
 					$clase = "tabla_par";
 				} else {
@@ -555,18 +555,18 @@ function usuario_permiso($campo) {
 
 	if ($cookie_sesion) {
 
-// 1. Comprobación de usuario recuperándolo a partir de la sesión
+// 1. Comprobaciï¿½n de usuario recuperï¿½ndolo a partir de la sesiï¿½n
 
     $cadena = "SELECT * FROM sesion WHERE id_sesion = " . $cookie_sesion;
-    $resultado = mysql_query($cadena);
+    $resultado = $mysqli->query($cadena);
     if (mysql_errno())	mysql_error();
 
-    if (mysql_num_rows($resultado) == 0 ) {
+    if (mysqli_num_rows($resultado) == 0 ) {
     	admin_login();
     	return 0;
     };
 
-    $fila_indice = mysql_fetch_array($resultado);
+    $fila_indice = $resultado->fetch_array();
 
     $id_usuario = $fila_indice[1];
 
@@ -576,7 +576,7 @@ function usuario_permiso($campo) {
 
                                                 // recuperamos el usuario y su nivel
             $cadena = "SELECT $campo FROM usuario WHERE id_usuario = $id_usuario";
-            $resultado = mysql_query($cadena);
+            $resultado = $mysqli->query($cadena);
             if (mysql_errno()) {
             	echo mysql_error();
             	return 0;

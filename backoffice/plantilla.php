@@ -279,7 +279,7 @@ class plantilla {
 				";
 						
 		} else {
-			$o .= "Hay abierta una sesión de usuario, puedes volver al 
+			$o .= "Hay abierta una sesiï¿½n de usuario, puedes volver al 
 					<a href='index.php?'>inicio</a> o <a href='logout.php?'>desconectar</a>";
 		}
 		
@@ -414,11 +414,11 @@ class plantilla {
 		
 		
 		$q = "SELECT titulo1, titulo2 FROM menu_backoffice WHERE funcion = '$funcion'";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 		
-		if (mysql_num_rows($r)) {
-			$titulo1 = stripslashes(mysql_result($r,0,0));
-			$titulo2 = stripslashes(mysql_result($r,0,1));
+		if ($r->num_rows) {
+			$titulo1 = stripslashes($rmysqli_result($r,0,0));
+			$titulo2 = stripslashes($rmysqli_result($r,0,1));
 		}
 		
 			
@@ -555,17 +555,17 @@ class plantilla {
 						AND id_padre = 0	
 					ORDER BY orden, menu_backoffice.id_menu";
 		}
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 
 		
 		$funcion = $_REQUEST["funcion"];
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
 			
 			$o .= "<ul>";
 			
-			while ($fila = mysql_fetch_array($r)) {
+			while ($fila = $r->fetch_array()) {
 
 				$o .= "<li>
 						<div id='div_menu_$i' class='menu_selector'></div>";
@@ -588,11 +588,11 @@ class plantilla {
 					}
 					
 					$q2 = "SELECT * FROM menu_backoffice WHERE id_padre = " . $fila["id_menu"] . " ORDER BY ORDEN";
-					$r2 = mysql_query($q2);
+					$r2 = $mysqli->query($q2);
 					
-					if (mysql_num_rows($r2)) {
+					if (mysqli_num_rows($r2)) {
 						$o .= "<div class='menusub' id='menusub_" . $fila["id_menu"] . "' style='$display'><ul>";
-						while ($fila2 = mysql_fetch_array($r2)) {
+						while ($fila2 = $r2->fetch_array()) {
 							if ($fila2["funcion"] == $funcion) {
 								$clase_a = "menu_activo";
 							} else {
@@ -694,7 +694,7 @@ class plantilla {
 	function presentacion() {
 		
 		$o .= "
-			Elige una opci&oacute;n del menú. 
+			Elige una opci&oacute;n del menï¿½. 
 			";
 		
 		return $o;

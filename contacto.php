@@ -13,6 +13,7 @@ class contacto {
 	
 	
 	function __construct() {
+		
 		$variable = "id_" . $this->tabla;
 		if ($_REQUEST[$variable] && is_numeric($_REQUEST[$variable])) {
 			$this->id = $_REQUEST[$variable];
@@ -36,7 +37,7 @@ class contacto {
 	
 	function reservar() {
 		
-			
+		global $mysqli;
 		
 		if ($_REQUEST["id_habitacion"] && is_numeric($_REQUEST["id_habitacion"])) {
 			include_once("habitacion.php");
@@ -97,17 +98,17 @@ class contacto {
 				$texto = new texto();
 				
 				$q = $post->consulta($this->id,'contacto','', $extra, 'id');
-				mysql_query($q);
+				$mysqli->query($q);
 				
 				if (!$this->id) {
-					$this->id = mysql_insert_id();
+					$this->id = $mysqli->insert_id;
 					$this->recuperar();
 					
 							// ENVIAR MAIL
 				}
 				
 				if ($post->valores["contacto"]) {
-					$contacto = "SÍ";
+					$contacto = "Sï¿½";
 				} else {
 					$contacto = "NO";
 				}
@@ -124,12 +125,12 @@ class contacto {
 				$mail->texto = "NOMBRE: " . $post->valores["nombre"] . "<br/>
 EMAIL: " . $post->valores["email"] . "<br/>
 TLF.: " . $post->valores["tlf"] . "<br/>
-HABITACIÓN: " . $habitacion->datos["nombre"] . "<br/>
+HABITACIï¿½N: " . $habitacion->datos["nombre"] . "<br/>
 FECHAS: " . $post->valores["fecha1"] . " - " . $post->valores["fecha2"] . "<br/>
 CONTACTO COMERCIAL: $contacto<br/><br/>
 
 COMENTARIOS:<br/> " . nl2br($post->valores["comentarios"]) . "<br/><br/>
-ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN CONTACTO CON USTEDES PARA CONFIRMAR DISPONIBILIDAD Y FORMALIZAR LA MISMA"; 
+ESTE CORREO NO CONSTITUYE UNA CONFIRMACIï¿½N DE LA RESERVA.  EL HOTEL SE PONDRï¿½ EN CONTACTO CON USTEDES PARA CONFIRMAR DISPONIBILIDAD Y FORMALIZAR LA MISMA"; 
 				$salida = $mail->enviar();
 				
 				if ($mail->error) {
@@ -139,7 +140,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 					<h2>RESERVAS</h2>
 					<div style='height: 23px;'></div>
 					
-					Ha habido un error en el envío. Puede ponerse en contacto con nosotros a través del email info@almazaradevaldeverdeja.com
+					Ha habido un error en el envï¿½o. Puede ponerse en contacto con nosotros a travï¿½s del email info@almazaradevaldeverdeja.com
 			</div>
 								</div>
 					";
@@ -243,12 +244,13 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 	
 	
 	function recuperar() {
+		global $mysqli;
 		if ($this->id) {
 			$q = "SELECT * FROM $this->tabla WHERE id = $this->id";
-			$r = mysql_query($q);
+			$r = $mysqli->query($q);
 			
-			if (mysql_num_rows($r)){
-				$this->datos = mysql_fetch_assoc($r);	
+			if ($r->num_rows){
+				$this->datos = $r->fetch_assoc();	
 			}
 		} else {
 			$this->datos = "";
@@ -264,6 +266,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 	
 	
 	function respondido() {
+		global $mysqli;
 		
 		if (!$this->id) {
 			return acceso_restringido();
@@ -278,7 +281,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 		$q = "UPDATE contacto 
 				SET respondido = $respondido
 				WHERE id = $this->id";
-		mysql_query($q);
+		$mysqli->query($q);
 		
 		return;
 	}
@@ -290,7 +293,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 	
 	
 	function tabla() {
-
+		global $mysqli;
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
 		}
@@ -321,7 +324,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 				WHERE respondido = $respondido
 				ORDER BY fecha_alta DESC
 				LIMIT $puntero, $num_filas";
-		$r = mysql_query($q);
+		$r = $mysqli->query($q);
 
 		$o .= " <input type='hidden' id='hoja' value='" . $_REQUEST["hoja"] . "'/>
 				<input type='hidden' id='valor_respondido' value='" . $_REQUEST["respondido"] . "'/>
@@ -331,7 +334,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 		
 		$o .= "<h3>$titulo</h3><br/>";
 		
-		if (mysql_num_rows($r)) {
+		if ($r->num_rows) {
 			$i = 0;
 			
 			$o .= "
@@ -355,7 +358,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 				</div>
 			";
 			
-			while ($this->datos = mysql_fetch_array($r)) {
+			while ($this->datos = $r->fetch_array()) {
 				if (($i % 2) == 0) {
 					$clase = "tabla_par";
 				} else {
@@ -387,7 +390,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 	
 	
 	function tabla_fila() {
-		
+		global $mysqli;
 		if ($this->datos["id_tipo"] == 1) {
 			$tipo = "EVENTO";
 		} else if ($this->datos["id_tipo"] == 2) {
@@ -431,7 +434,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 	
 
 	function ver() {
-
+		global $mysqli;
 		if (!$GLOBALS["usuario"]->id_usuario) {
 			return acceso_restringido();
 		}
@@ -538,7 +541,7 @@ ESTE CORREO NO CONSTITUYE UNA CONFIRMACIÓN DE LA RESERVA.  EL HOTEL SE PONDRÁ EN
 		$o .= "
 			<div class='tabla_tr " . tabla_par($i++) . "'>	
 				<div class='tabla_td' style='width: 18%;'>
-					Nº DE PERSONAS
+					Nï¿½ DE PERSONAS
 				</div>
 				<div class='tabla_td' style='width: 78%;'>
 					" . $this->datos["numero"] . " 
