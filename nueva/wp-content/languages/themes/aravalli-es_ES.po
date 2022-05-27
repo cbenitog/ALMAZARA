@@ -1,0 +1,609 @@
+# Translation of Themes - Aravalli in Spanish (Spain)
+# This file is distributed under the same license as the Themes - Aravalli package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-08-31 19:57:04+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.0-alpha.1\n"
+"Language: es\n"
+"Project-Id-Version: Themes - Aravalli\n"
+
+#. Description of the theme
+#, gp-priority: high
+msgid "Aravalli is a WordPress theme crafted for a hotel, hostel, resort, apartment, room reservation, tourism business or any other accommodation services. It has a unique, modern, light and clean design which will make your website look awesome. View the demo of Aravalli Pro https://www.nayrathemes.com/demo/pro/?theme=aravalli"
+msgstr "Aravalli es un tema para WordPress construido para hoteles, hostales, resorts, apartamentos, reservas de habitaciones negocios turísticos o cualquier tipo de servicios de alojamiento. Tiene un diseño único, ligero y limpio, que hará que ru web luzca maravillosamente. Puedes ver la demo de Aravalli Pro en https://www.nayrathemes.com/demo/pro/?theme=aravalli"
+
+#. Theme Name of the theme
+#, gp-priority: high
+msgid "Aravalli"
+msgstr "Aravalli"
+
+#: inc/extras.php:97
+msgid "Get started with Aravalli"
+msgstr "Empieza a usar Aravalli"
+
+#: inc/extras.php:95
+msgid "Install and activate <strong>Clever Fox</strong> plugin for taking full advantage of all the features this theme has to offer."
+msgstr "Instala y activa el plugin <strong>Clever Fox</strong> para sacar el máximo partido a todas las características de este tema."
+
+#. translators: 1: welcome page link starting html tag, 2: welcome page link
+#. ending html tag.
+#: inc/extras.php:91
+msgid "Welcome! Thank you for choosing %1$s!"
+msgstr "¡Bienvenido! ¡Gracias por elegir %1$s!"
+
+#: inc/extras.php:84
+msgid "Theme Screenshot"
+msgstr "Captura de pantalla del tema"
+
+#: inc/customize/aravalli-premium.php:36
+msgid "Show Some Love"
+msgstr "Danos un poco de cariño"
+
+#: inc/customize/aravalli-premium.php:32
+msgid "Free Vs Pro"
+msgstr "Gratis vs Pro"
+
+#: inc/customize/aravalli-premium.php:30
+msgid "Get Support"
+msgstr "Obtener soporte"
+
+#: inc/customize/aravalli-premium.php:28
+msgid "View Documentation"
+msgstr "Ver la documentación"
+
+#: inc/customize/aravalli-premium.php:12 inc/customize/aravalli-premium.php:34
+msgid "Upgrade to Pro"
+msgstr "Mejorar a Pro"
+
+#. Template Name of the theme
+msgid "Fullwidth Page"
+msgstr "Página a ancho completo"
+
+#. Template Name of the theme
+msgid "Homepage"
+msgstr "Página de inicio"
+
+#: template-parts/sections/section-header.php:136
+msgid "Type To Search"
+msgstr "Escribe tu búsqueda"
+
+#: template-parts/sections/section-breadcrumb.php:44
+msgid "Author: %s"
+msgstr "Autor: %s"
+
+#: template-parts/sections/section-breadcrumb.php:40
+msgid "Error 404"
+msgstr "Error 404"
+
+#: template-parts/sections/section-breadcrumb.php:36
+msgid "Tag Archives: %s"
+msgstr "Archivo de la etiqueta: %s"
+
+#: template-parts/sections/section-breadcrumb.php:32
+msgid "Category Archives: %s"
+msgstr "Archivo de la categoría: %s"
+
+#: template-parts/sections/section-breadcrumb.php:28
+msgid "Yearly Archives: %s"
+msgstr "Archivo del año: %s"
+
+#: template-parts/sections/section-breadcrumb.php:24
+msgid "Monthly Archives: %s"
+msgstr "Archivo del mes: %s"
+
+#: template-parts/sections/section-breadcrumb.php:20
+msgid "Daily Archives: %s"
+msgstr "Archivo del día: %s"
+
+#: template-parts/content/content.php:38
+msgid "Pages:"
+msgstr "Páginas:"
+
+#. translators: %s: Name of current post.
+#: template-parts/content/content.php:33
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Sigue leyendo %s <span class=\"meta-nav\">&rarr;</span>"
+
+#: template-parts/content/content-page-list.php:39
+#: template-parts/content/content-page.php:39
+#: template-parts/content/content-search.php:39
+msgid "Read More"
+msgstr "Leer más"
+
+#: template-parts/content/content-page-list.php:24
+#: template-parts/content/content-page.php:24
+#: template-parts/content/content-search.php:24
+msgid "Posted By"
+msgstr "Publicado por"
+
+#: template-parts/content/content-none.php:18
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Parece que no podemos encontrar lo que estás buscando. Quizás probando una búsqueda podríamos ayudarte."
+
+#: template-parts/content/content-none.php:16
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Lo siento, pero no hay nada que coincida con tus términos de búsqueda. Por favor, inténtalo de nuevo con palabras clave diferentes."
+
+#: template-parts/content/content-none.php:14
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "¿Listo para publicar tu primera entrada? <a href=\"%1$s\">Empieza aquí</a>."
+
+#. translators: %s: Name of current post
+#: inc/template-tags.php:70
+msgid "Edit %s"
+msgstr "Editar %s"
+
+#. translators: %s: post title
+#: inc/template-tags.php:63
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr "Deja un comentario<span class=\"screen-reader-text\"> en %s</span>"
+
+#: inc/template-tags.php:56
+msgid "Tagged %1$s"
+msgstr "Etiquetado como %1$s"
+
+#: inc/template-tags.php:50
+msgid "Posted in %1$s"
+msgstr "Publicado en %1$s"
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:48 inc/template-tags.php:54
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:33
+msgctxt "post author"
+msgid "by %s"
+msgstr "por %s"
+
+#: inc/template-tags.php:28
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "Publicado el %s"
+
+#: inc/sidebar/sidebar.php:30
+msgid "The Footer Widget Area"
+msgstr "Área de widgets del pie de página"
+
+#: inc/sidebar/sidebar.php:28
+msgid "Footer Widget Area"
+msgstr "Área de widgets del pie de página"
+
+#: inc/sidebar/sidebar.php:20
+msgid "The Primary Widget Area"
+msgstr "Área de widgets principal"
+
+#: inc/sidebar/sidebar.php:18
+msgid "Sidebar Widget Area"
+msgstr "Área de widgets de la barra lateral"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:803
+msgid "Price Badge"
+msgstr "Insignia de precio"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:800
+msgid "Ribbon Text"
+msgstr "Texto de la cinta"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:745
+#: inc/customizer-repeater/class/customizer-repeater-control.php:778
+msgid "Add Icon"
+msgstr "Añadir icono"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:740
+#: inc/customizer-repeater/class/customizer-repeater-control.php:770
+msgid "Remove Icon"
+msgstr "Eliminar icono"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:723
+msgid "Social icons"
+msgstr "Iconos sociales"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:715
+msgid "None"
+msgstr "Ninguno"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:710
+msgid "Image type"
+msgstr "Tipo de imagen"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:699
+msgid "Center"
+msgstr "Centro"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:695
+msgid "Right"
+msgstr "Derecha"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:691
+msgid "Left"
+msgstr "Izquierda"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:687
+msgid "Slide Align"
+msgstr "Alineación de diapositiva"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:675
+msgid "Slider Image"
+msgstr "Imagen del carrusel"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:649
+#: inc/customizer-repeater/class/customizer-repeater-control.php:678
+msgid "Upload Image"
+msgstr "Subir imagen"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:646
+#: inc/customizer-repeater/class/customizer-repeater-control.php:714
+msgid "Image"
+msgstr "Imagen"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:611
+msgid "http://fontawesome.io/icons/"
+msgstr "http://fontawesome.io/icons/"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:610
+msgid "Note: Some icons may not be displayed here. You can see the full list of icons at %1$s."
+msgstr "Nota: algunos iconos no se muestran aquí. Puedes ver la lista completa de iconos en %1$s."
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:594
+msgid "Open link in new tab:"
+msgstr "Abrir enlace en una nueva pestaña:"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:557
+msgid "Delete field"
+msgstr "Borrar campo"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:492
+msgid "skill"
+msgstr "habilidad"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:422
+msgid "Delete %s"
+msgstr "Borrar %s"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:406
+#: inc/customizer-repeater/class/customizer-repeater-control.php:546
+msgid "Designation"
+msgstr "Denominación"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:398
+#: inc/customizer-repeater/class/customizer-repeater-control.php:537
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:388
+#: inc/customizer-repeater/class/customizer-repeater-control.php:455
+msgid "Color"
+msgstr "Color"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:358
+#: inc/customizer-repeater/class/customizer-repeater-control.php:522
+msgid "Video Url"
+msgstr "URL del vídeo"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:344
+#: inc/customizer-repeater/class/customizer-repeater-control.php:509
+#: inc/customizer-repeater/class/customizer-repeater-control.php:737
+#: inc/customizer-repeater/class/customizer-repeater-control.php:759
+msgid "Link"
+msgstr "Enlace"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:333
+#: inc/customizer-repeater/class/customizer-repeater-control.php:499
+msgid "Button Text"
+msgstr "Texto del botón"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:325
+msgid "skills"
+msgstr "habilidades"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:41
+msgid "Customizer Repeater"
+msgstr "Repetidor del personalizador"
+
+#: inc/customizer-repeater/class/customizer-repeater-control.php:36
+msgid "Add new field"
+msgstr "Añadir nuevo campo"
+
+#: inc/customizer-notify/aravalli-customizer-notify.php:111
+msgid "Activating"
+msgstr "Activando"
+
+#: inc/customize/customizer_recommended_plugin.php:18
+msgid "Deactivate"
+msgstr "Desactivar"
+
+#: inc/customize/customizer_recommended_plugin.php:17
+msgid "Activate"
+msgstr "Activar"
+
+#: inc/customize/customizer_recommended_plugin.php:16
+msgid "Install and Activate"
+msgstr "Instalar y activar"
+
+#: inc/customize/customizer_recommended_plugin.php:15
+msgid "Recommended Plugin"
+msgstr "Plugin recomendado"
+
+#: inc/customize/customizer_recommended_plugin.php:14
+msgid "Recommended Actions"
+msgstr "Acciones recomendadas"
+
+#: inc/customize/customizer_recommended_plugin.php:10
+msgid "Install and activate <strong>Cleverfox</strong> plugin for taking full advantage of all the features this theme has to offer."
+msgstr "Instala y activa el plugin <strong>Cleverfox</strong> para aprovechar al máximo todas las características que ofrece este tema."
+
+#: inc/customize/aravalli-header.php:361 inc/customize/aravalli-header.php:380
+msgid "Sticky Header"
+msgstr "Cabecera fija"
+
+#: inc/customize/aravalli-header.php:348
+msgid "Button Link"
+msgstr "Enlace del botón"
+
+#: inc/customize/aravalli-header.php:329
+#: inc/customizer-repeater/class/customizer-repeater-control.php:318
+#: inc/customizer-repeater/class/customizer-repeater-control.php:485
+msgid "Button Label"
+msgstr "Etiqueta del botón"
+
+#: inc/customize/aravalli-header.php:291
+msgid "Button"
+msgstr "Botón"
+
+#: inc/customize/aravalli-header.php:254
+msgid "Search"
+msgstr "Buscar"
+
+#: inc/customize/aravalli-header.php:156
+msgid "Info Right"
+msgstr "Información derecha"
+
+#: inc/customize/aravalli-header.php:92 inc/customize/aravalli-header.php:193
+#: inc/customizer-repeater/class/customizer-repeater-control.php:605
+#: inc/customizer-repeater/class/customizer-repeater-control.php:713
+msgid "Icon"
+msgstr "Icono"
+
+#: inc/customize/aravalli-header.php:72 inc/customize/aravalli-header.php:173
+#: inc/customize/aravalli-header.php:271 inc/customize/aravalli-header.php:309
+#: inc/customize/aravalli-header.php:397
+msgid "Hide/Show"
+msgstr "Ocultar/Mostrar"
+
+#: inc/customize/aravalli-header.php:55
+msgid "Info Left"
+msgstr "Información izquierda"
+
+#: inc/customize/aravalli-header.php:35
+msgid "Header Navigation"
+msgstr "Navegación de la cabecera"
+
+#: inc/customize/aravalli-header.php:23
+msgid "Site Identity"
+msgstr "Identidad del sitio"
+
+#: inc/customize/aravalli-general.php:216
+msgid "Fixed"
+msgstr "Fijo"
+
+#: inc/customize/aravalli-general.php:215
+msgid "Scroll"
+msgstr "Scroll"
+
+#: inc/customize/aravalli-general.php:214
+msgid "Inherit"
+msgstr "Heredar"
+
+#: inc/customize/aravalli-general.php:209
+msgid "Background Attachment"
+msgstr "Fijación del fondo"
+
+#: inc/customize/aravalli-general.php:146
+msgid "Min Height"
+msgstr "Altura mínima"
+
+#: inc/customize/aravalli-general.php:106
+msgid "Hide / Show Checkin Section"
+msgstr "Ocultar / mostrar la sección de Checkin"
+
+#: inc/customize/aravalli-general.php:85
+msgid "Hide / Show Section"
+msgstr "Sección Ocultar / Mostrar"
+
+#: inc/customize/aravalli-general.php:66
+msgid "Settings"
+msgstr "Ajustes"
+
+#: inc/customize/aravalli-general.php:46
+msgid "Breadcrumb"
+msgstr "Migas de pan"
+
+#: inc/customize/aravalli-general.php:35
+msgid "Hide / Show Scroller"
+msgstr "Ocultar / Mostrar scroller"
+
+#: inc/customize/aravalli-general.php:16
+msgid "Scroller"
+msgstr "Scroller"
+
+#: inc/customize/aravalli-general.php:7
+msgid "General"
+msgstr "Generales"
+
+#: inc/customize/aravalli-footer.php:69 inc/customize/aravalli-general.php:190
+msgid "Background Image"
+msgstr "Imagen de fondo"
+
+#: inc/customize/aravalli-footer.php:50 inc/customize/aravalli-general.php:172
+msgid "Background"
+msgstr "Fondo"
+
+#: inc/customize/aravalli-footer.php:38
+msgid "Copyright"
+msgstr "Copyright"
+
+#: inc/customize/aravalli-footer.php:25
+msgid "Copyright &copy; [current_year] [site_title] | Powered by [theme_author]"
+msgstr "Copyright &copy; [current_year] [site_title] | Funciona gracias a [theme_author]"
+
+#: inc/customize/aravalli-footer.php:17
+msgid "Copyright Content"
+msgstr "Contenido del copyright"
+
+#: inc/customize/aravalli-footer.php:10
+msgid "Footer"
+msgstr "Pie"
+
+#: inc/customize/aravalli-blog.php:175
+msgid "No of Posts Display"
+msgstr "Nº entradas a mostar"
+
+#: inc/customize/aravalli-blog.php:157 inc/customize/aravalli-general.php:127
+msgid "Content"
+msgstr "Contenido"
+
+#: inc/customize/aravalli-blog.php:136
+#: inc/customizer-repeater/class/customizer-repeater-control.php:311
+#: inc/customizer-repeater/class/customizer-repeater-control.php:478
+#: inc/customizer-repeater/class/customizer-repeater-control.php:809
+msgid "Description"
+msgstr "Descripción"
+
+#: inc/customize/aravalli-blog.php:116 inc/customize/aravalli-header.php:133
+#: inc/customize/aravalli-header.php:234
+#: inc/customizer-repeater/class/customizer-repeater-control.php:304
+#: inc/customizer-repeater/class/customizer-repeater-control.php:471
+msgid "Subtitle"
+msgstr "Subtítulo"
+
+#: inc/customize/aravalli-blog.php:94 inc/customize/aravalli-header.php:112
+#: inc/customize/aravalli-header.php:213
+#: inc/customizer-repeater/class/customizer-repeater-control.php:296
+#: inc/customizer-repeater/class/customizer-repeater-control.php:463
+#: inc/customizer-repeater/class/customizer-repeater-control.php:806
+msgid "Title"
+msgstr "Título"
+
+#: inc/customize/aravalli-blog.php:75 inc/customize/aravalli-header.php:12
+msgid "Header"
+msgstr "Cabecera"
+
+#: inc/customize/aravalli-blog.php:56
+msgid "Hide / Show"
+msgstr "Ocultar / Mostrar"
+
+#: inc/customize/aravalli-blog.php:36
+msgid "Setting"
+msgstr "Ajuste"
+
+#: inc/customize/aravalli-blog.php:16
+msgid "Blog Section"
+msgstr "Sección de blog"
+
+#: inc/customize/aravalli-blog.php:7
+msgid "Homepage Sections"
+msgstr "Secciones de la página de inicio"
+
+#: inc/class-wp-bootstrap-navwalker.php:366
+msgid "Add a menu"
+msgstr "Añade un menú"
+
+#: inc/breadcrumb/breadcrumb.php:146
+msgid "Page"
+msgstr "Página"
+
+#: inc/breadcrumb/breadcrumb.php:141
+msgid "Error 404 "
+msgstr "Error 404 "
+
+#: inc/breadcrumb/breadcrumb.php:137
+msgid "Articles posted by "
+msgstr "Artículos publicados por "
+
+#: inc/breadcrumb/breadcrumb.php:131
+msgid "Posts tagged "
+msgstr "Entradas con la etiqueta "
+
+#: inc/breadcrumb/breadcrumb.php:32
+msgid "Search results for "
+msgstr "Resultados de la búsqueda"
+
+#: inc/breadcrumb/breadcrumb.php:26
+msgid "Archive by category"
+msgstr "Archivo por categoría"
+
+#: inc/breadcrumb/breadcrumb.php:6
+msgid "Home"
+msgstr "Inicio"
+
+#: inc/breadcrumb/breadcrumb.php:4 inc/breadcrumb/breadcrumb.php:7
+msgid "1"
+msgstr "1"
+
+#: header.php:18
+msgid "Skip to content"
+msgstr "Saltar al contenido"
+
+#: functions.php:42
+msgid "Primary Menu"
+msgstr "Menú principal"
+
+#: footer.php:21
+msgid "<a href=\"#\">Aravalli WordPress Theme</a>"
+msgstr "<a href=\"#\">Tema Aravalli para WordPress</a>"
+
+#: comments.php:77
+msgid "Comments are closed."
+msgstr "Los comentarios están cerrados."
+
+#: comments.php:45 comments.php:65
+msgid "Newer Comments"
+msgstr "Comentarios más recientes"
+
+#: comments.php:44 comments.php:64
+msgid "Older Comments"
+msgstr "Comentarios anteriores"
+
+#: comments.php:41 comments.php:62
+msgid "Comment navigation"
+msgstr "Navegación de comentarios"
+
+#: 404.php:23
+msgid "Go To Home"
+msgstr "Ir al Inicio"
+
+#: 404.php:21
+msgid "Oops! That page can’t be found."
+msgstr "¡Vaya! No se puede encontrar esa página."
+
+#: 404.php:19
+msgid "Something Went Wrong"
+msgstr "Algo salió mal"
+
+#: 404.php:17
+msgid "0"
+msgstr "0"
+
+#: 404.php:17
+msgid "4"
+msgstr "4"
+
+#. Theme URI of the theme
+#, gp-priority: low
+msgid "https://www.nayrathemes.com/aravalli-free/"
+msgstr "https://www.nayrathemes.com/aravalli-free/"
+
+#. Author URI of the theme
+#, gp-priority: low
+msgid "https://www.nayrathemes.com/"
+msgstr "https://www.nayrathemes.com/"
+
+#. Author of the theme
+#, gp-priority: low
+msgid "Nayra Themes"
+msgstr "Nayra Themes"
