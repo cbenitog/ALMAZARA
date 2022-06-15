@@ -1,0 +1,41 @@
+/*
+Theme Name: Aravalli Business (child)
+Theme URI: 
+Version: 1.0
+Description: Modificaciones de Aravalli Business
+Author: CBG
+Author URI: 
+Template: aravalli-business
+*/
+ 
+
+.habitacion_caracteristica > ul {
+    color: #807c7c;
+    line-height: 30px;
+    padding-left: 20px;	
+}
+.habitacion_caracteristica > ul > li {
+   float:left;
+   width:40%;
+}
+
+.habitacion_caracteristica:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+.main-slider .owl-nav button.owl-next, .main-slider .owl-nav button.owl-prev {
+	background-color: rgb(0,0,0,0) !important; 
+   background-image: none !important;
+}
+
+#map {
+   height: auto;
+   background: none;
+}
+
+#certificates {
+   padding-bottom: 0 !important;
+}
