@@ -1,1 +1,0 @@
-<?php return unserialize('a:2:{s:8:"lifetime";i:1652547520;s:4:"data";a:1:{i:1;a:1:{i:0;s:43:"http://www.almazaradevaldeverdeja.com/nueva";}}}', ['allowed_classes' => false]);
