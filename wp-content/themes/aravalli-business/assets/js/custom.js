@@ -247,6 +247,16 @@
         });
 
 
+        $('.widget-info a').on('click', function(e) {
+
+            $mob_h_top.toggleClass("active"); //you can list several class names 
+  
+            $('.header-sidebar-toggle').toggleClass("active");      
+  
+           
+  
+          });
+
 
         $(".menu-right")
 

@@ -251,15 +251,23 @@ if ( ! function_exists( 'aravalli_abv_hdr_group_1' ) ) {
 			if($above_header_first == 'default'): 
 				 if($hide_show_phone_details == '1') { ?>
 					 <div class="widget widget-info phone">
-						<i class="fa <?php echo esc_attr($tlh_phone_icon); ?>"></i>
-						<span><?php echo esc_html($tlh_phone_title); ?></span>
+					 	<a href="tel:<?php echo esc_html($tlh_phone_title); ?>">
+						<i class="fa <?php echo esc_attr($tlh_phone_icon); ?>"  style="color: var(--bs-primary);"></i>
+						<span><?php echo esc_html($tlh_phone_title); ?></span></a>
+					</div>
+
+					<div class="widget widget-info phone">
+					<a href="https://wa.me/+34608548393">	
+						<i class="fa fa-whatsapp" style="color: var(--bs-primary);"></i>
+						<span>608548393</span></a>
 					</div>
 				<?php } 
 				  if($hide_show_email_details == '1') {
 				 ?>	
 					<div class="widget widget-info email">
-						<i class="fa <?php echo esc_attr($tlh_email_icon); ?>"></i>
-						<span><?php echo esc_html($tlh_email_title); ?></span>
+						<a href="https://almazaradevaldeverdeja.com/#call_action">
+						<i class="fa <?php echo esc_attr($tlh_email_icon); ?>"  style="color: var(--bs-primary);"></i>
+						<span><?php echo esc_html($tlh_email_title); ?></span></a>
 					</div>
 				 <?php } endif;
 		

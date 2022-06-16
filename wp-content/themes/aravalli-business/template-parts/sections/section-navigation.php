@@ -224,7 +224,12 @@
 		<div class="flex-filled headtop-mobi">
 			<a href="javascript:void(0)" class="header-sidebar-toggle"><span></span></a>
 		</div>
-		<div id="mob-h-top" class="mobi-head-top animated"></div>
+		<div id="mob-h-top" class="mobi-head-top animated">
+			<b>Horario de atención Telefónica:</b>
+			<br>
+			Martes a Sábado: 10:00 a 14:00 - 16:00 a 20:00							
+			<br>
+		</div>
 		<div class="flex-filled mobile-logo">
 			<?php
 				if(has_custom_logo())
