@@ -33,7 +33,12 @@
 		<?php endif; ?>	
 		<div class="row">
 			<?php 
-				$args = array( 'post_type' => 'aravalli_room','posts_per_page' => $room_display_num);  
+				$args = array( 	'post_type' => 'aravalli_room',
+								'posts_per_page' => $room_display_num, 
+								'meta_key' =>  'room_position',
+								'orderby' => 'meta_value_num',
+								'order' => 'ASC');
+
 				$room = new WP_Query( $args ); 
 				if( $room->have_posts() )
 				{
