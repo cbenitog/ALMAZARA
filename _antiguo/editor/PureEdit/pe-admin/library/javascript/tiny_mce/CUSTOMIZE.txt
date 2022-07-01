@@ -1,0 +1,7 @@
+/// Note from Michael Dick ///
+
+This is very important if you plan to modify TinyMCE to your own preferences. I have stripped down TinyMCE to it's bare bones and removed any files that PureEdit does not use including all pluigins. You will need to download and re-install TinyMCE if you plan to customize it.
+
+Thanks,
+Michael Dick
+http://www.m1k3.net

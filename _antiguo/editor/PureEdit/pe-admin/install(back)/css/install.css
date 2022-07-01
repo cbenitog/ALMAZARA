@@ -1,0 +1,246 @@
+/****************************************************
+// PureEdit.
+// ==================================================
+// URL: http://www.pureedit.com.
+// Copyright (c): 2007 Michael Dick.
+// ==================================================
+// File: installer.css
+****************************************************/
+
+/* =Globals.
+---------------------------------------------------*/
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    font: normal 80%/150% "Arial";
+	background: #fff url(../images/bg.gif) repeat-x;
+}
+
+div#wrapper
+{
+	width: 600px;
+	margin: 0 auto;
+}
+
+h1 a
+{
+	text-indent: -999999px;
+	height: 23px;
+	width: 139px;
+	display: block;
+	margin: 24px 0 50px;
+	float: left;
+	background: url(../images/logo.gif) no-repeat;
+}
+
+	em#title
+	{
+		display: block;
+		margin: 31px 0 0;
+		float: right;
+		color: #ccc;
+		font-size: 16px;
+	}
+	
+h2
+{
+	padding: 25px 0 15px;
+	font-size: 15px;
+}
+
+p
+{
+	margin: 0 0 20px;
+	color: #7d7d7d;
+}
+
+span#green
+{
+	color: #60a950;
+	font-weight: bold;
+}
+
+span#red
+{
+	color: #a95050;
+	font-weight: bold;	
+}
+
+
+div#formDiv
+{
+	padding: 20px 20px 10px 20px;
+	background-color: #ebebeb;
+	border: 1px solid #c9c9c9;
+}
+
+
+/* =Steps
+---------------------------------------------------*/
+
+ul#steps
+{
+	clear: both;
+ 	text-align: left;
+ 	color: #e1fcc0;
+ 	vertical-align: middle;
+ 	border-top: 5px solid #a6ba89;
+ 	border-bottom: 2px solid #86976e;
+	background-color: #a6ba89;
+	padding: 15px;
+}
+
+	ul#steps li
+	{
+		display: inline;
+		color: #d5eab6;
+		list-style: none;
+	}
+	
+		ul#steps li#on
+		{
+			font-weight: bold;
+			color: #ebebeb;
+		}
+		
+		
+li.border
+{
+	margin-top: 10px;
+	padding-top: 15px;
+	border-top: 1px solid #ccc;
+}	
+		
+		
+
+/* =Error
+---------------------------------------------------*/
+
+div#error
+{
+	padding: 10px;
+	margin: 0 0 15px;
+	color: #7b2121;
+	border: 1px solid #d46060;
+	background-color: #ff9f9f;
+}
+
+div#noerror
+{
+	padding: 10px;
+	margin: 0 0 15px;
+	color: #418739;
+	border: 1px solid #78bf73;
+	background-color: #b0ffaa;
+}
+
+div#note
+{
+	padding: 10px;
+	margin: 20px 0 20px;
+	color: #4f4d32;
+	background-color: #fffabc;
+	border: 2px solid #e9e5ac;
+}
+
+
+
+
+
+
+
+/* =Table
+---------------------------------------------------*/
+
+table
+{
+	width: 100%;
+}
+
+	table th
+	{
+		border-bottom: 2px solid #c6c6c6;
+		border-top: 2px solid #dedede;
+		background-color: #dedede;
+		text-align: left;
+		padding: 10px;
+	}
+	
+	table td.bad
+	{
+		border-bottom: 1px solid #b26464;
+		background-color: #fdc3c3;
+	}	
+	
+	table td.good
+	{
+		border-bottom: 1px solid #89c07e;	
+		background-color: #cdfdc3;
+	}		
+	
+	table td
+	{
+		padding: 10px;
+	}
+
+
+
+/* =UL's
+---------------------------------------------------*/
+
+ul#form
+{
+	width: 100%;
+	list-style: none;
+}
+
+	ul#form li
+	{
+		width: 50%;
+		list-style: none;		
+		float: left;
+	}
+	
+	ul#form li em
+	{
+		font-weight: bold;
+		width: 100%;
+		display: block;
+		margin: 10px 0;
+		font-style: normal;
+	}
+
+
+
+/* =Forms
+---------------------------------------------------*/
+
+button
+{
+	float: right;
+	padding: 5px;
+	margin: 20px 0 5px;	
+	vertical-align: middle;
+}
+
+small#extraLink a
+{
+	float: right;
+	clear: right;
+	color: #75875b;
+}
+
+input,
+select
+{
+	padding: 3px;
+	width: 80%;
+	font-family: "Arial";
+	font-size: 12px;
+}

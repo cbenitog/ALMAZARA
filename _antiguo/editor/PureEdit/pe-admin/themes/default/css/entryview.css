@@ -1,0 +1,50 @@
+/****************************************************
+// PureEdit.
+// ==================================================
+// URL: http://www.pureedit.com.
+// Copyright (c): 2007 Michael Dick.
+// ==================================================
+// File: sectorview.css
+****************************************************/
+
+
+/* =Sectorview area.
+---------------------------------------------------*/
+
+#entryviewBackground
+{
+	background-color: #fff;
+	padding: 15px;
+}
+
+div#content dt
+{
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+div#content dt:first-letter
+{
+	text-transform:capitalize;
+}
+
+div#content dd
+{
+	padding: 10px 0 12px;
+	border-bottom: 1px solid #dbdbdb;	
+}
+
+	div#content dd input.txt,
+	div#content dd input.file	
+	{
+		font: .99em "Trebuchet MS";
+		width: 40%;
+		padding: 3px;
+	}
+
+div#content dd select.select
+{
+	font: .99em "Trebuchet MS";
+	width: 25%;
+	padding: 3px;
+}

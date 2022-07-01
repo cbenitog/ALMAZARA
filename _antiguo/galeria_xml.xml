@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<thumbnails>
+	<thumbnail filename="30-thumb.jpg" url="30-big.jpg" target="_parent"
+	title="Villa Zen"
+	description="Sala de Jacuzzi" />
+
+	<thumbnail filename="wp_2-thumb.jpg" url="wp_2-big.jpg" target="_parent"
+	title="Villa Zen"
+	description="Dormitorio" />
+
+	<thumbnail filename="wp_3-thumb.jpg" url="wp_3-big.jpg" target="_parent"
+	title="Villa Zen"
+	description="Dormitorio" />
+
+	<thumbnail filename="wp_4-thumb.jpg" url="wp_4-big.jpg" target="_parent"
+	title="Plaza 36"
+	description="Placita y camino entre villas Metro y Tao" />
+
+	<thumbnail filename="wp_5-thumb.jpg" url="wp_5-big.jpg" target="_parent"
+	title="El Burladero"
+	description="Plaza con bancos y fuente entre villas." />
+
+	<thumbnail filename="wp_6-thumb.jpg" url="wp_6-big.jpg" target="_parent"
+	title="Jardines"
+	description="Jardines frente a Villas Rustica y Metro 3 y 4" />
+
+	<thumbnail filename="wp_7-thumb.jpg" url="wp_7-big.jpg" target="_parent"
+	title="El Caminito"
+	description="Desde la Villa Zen pasando por la Villa Rustica." />
+
+	<thumbnail filename="wp_8-thumb.jpg" url="wp_8-big.jpg" target="_parent"
+	title="Villa Rustica"
+	description="Jacuzzi de la Villa Rustica" />
+
+	<thumbnail filename="wp_9-thumb.jpg" url="wp_9-big.jpg" target="_parent"
+	title="Exteriores"
+	description="Nocturna Almazara" />
+
+	<thumbnail filename="wp_10-thumb.jpg" url="wp_10-big.jpg" target="_parent"
+	title="Exteriores"
+	description="Restaurante desde el Jardin" />
+
+	<thumbnail filename="wp_11-thumb.jpg" url="wp_11-big.jpg" target="_parent"
+	title="Exteriores"
+	description="Restaurante, Bodega y Gimnasio desde Jardin" />
+
+	<thumbnail filename="wp_12-thumb.jpg" url="wp_12-big.jpg" target="_parent"
+	title="Villa Zen"
+	description="Sala Jacuzzi de la Villa Zen" />
+
+	<thumbnail filename="wp_13-thumb.jpg" url="wp_13-big.jpg" target="_parent"
+	title="Villa Baldaquino"
+	description="Desde la Terraza" />
+
+	<thumbnail filename="wp_14-thumb.jpg" url="wp_14-big.jpg" target="_parent"
+	title="Villa Baldaquino"
+	description="Desde la puerta de acceso" />
+
+	<thumbnail filename="wp_15-thumb.jpg" url="wp_15-big.jpg" target="_parent"
+	title="Villa Granito."
+	description="Dormitorio" />
+
+	<thumbnail filename="1-thumb.jpg" url="2-big.jpg" target="_parent"
+	title="El Burladero"
+	description="Vista desde la villa Mirador" />
+
+	<thumbnail filename="2-thumb.jpg" url="2-big.jpg" target="_parent"
+	title="Terraza Villa Rustica"
+	description="Terraza Villa Rustica" />
+
+	<thumbnail filename="3-thumb.jpg" url="3-big.jpg" target="_parent"
+	title="Terraza Villa Metro"
+	description="Terraza Villa Metro" />
+
+	<thumbnail filename="4-thumb.jpg" url="4-big.jpg" target="_parent"
+	title="Plaza"
+	description="Plaza Villas Rustica, Metro y Baldaquino" />
+
+	<thumbnail filename="5-thumb.jpg" url="5-big.jpg" target="_parent"
+	title="Plaza"
+	description="Plaza Villas Rustica y Zen" />
+
+	<thumbnail filename="6-thumb.jpg" url="6-big.jpg" target="_parent"
+	title="Plaza"
+	description="Plaza entre Rustica, Metro y Baldaquino" />
+
+	<thumbnail filename="10-thumb.jpg" url="10-big.jpg" target="_parent"
+	title="Villa Malva"
+	description="Ducha de Hidromasaje" />
+
+	<thumbnail filename="11-thumb.jpg" url="11-big.jpg" target="_parent"
+	title="Villa Baldaquino"
+	description="Bañera de Hidromasaje" />
+
+	<thumbnail filename="14-thumb.jpg" url="14-big.jpg" target="_parent"
+	title="Villa Granito"
+	description="" />
+
+	<thumbnail filename="15-thumb.jpg" url="15-big.jpg" target="_parent"
+	title="Villa Granito"
+	description="" />
+
+	<thumbnail filename="16-thumb.jpg" url="16-big.jpg" target="_parent"
+	title="Villa Granito"
+	description="" />
+
+	<thumbnail filename="17-thumb.jpg" url="17-big.jpg" target="_parent"
+	title="Villa Malva"
+	description="Detalle del Jacuzzi" />
+
+	<thumbnail filename="18-thumb.jpg" url="18-big.jpg" target="_parent"
+	title="Villa Malva"
+	description="" />
+
+	<thumbnail filename="19-thumb.jpg" url="19-big.jpg" target="_parent"
+	title="Villa Metro"
+	description="" />
+
+	<thumbnail filename="20-thumb.jpg" url="20-big.jpg" target="_parent"
+	title="Villa Metro"
+	description="" />
+
+	<thumbnail filename="21-thumb.jpg" url="21-big.jpg" target="_parent"
+	title="Villa Metro"
+	description="" />
+
+	<thumbnail filename="22-thumb.jpg" url="22-big.jpg" target="_parent"
+	title="Villa Mirador"
+	description="" />
+
+	<thumbnail filename="23-thumb.jpg" url="23-big.jpg" target="_parent"
+	title="Villa Rustica"
+	description="Detalle de Jacuzzi" />
+
+	<thumbnail filename="24-thumb.jpg" url="24-big.jpg" target="_parent"
+	title="Villa Rústica"
+	description="Baño" />
+
+	<thumbnail filename="25-thumb.jpg" url="25-big.jpg" target="_parent"
+	title="Villa Rústica"
+	description="" />
+
+	<thumbnail filename="26-thumb.jpg" url="26-big.jpg" target="_parent"
+	title="Villa Tao"
+	description="" />
+
+	<thumbnail filename="27-thumb.jpg" url="27-big.jpg" target="_parent"
+	title="Villa Tao"
+	description="" />
+
+	<thumbnail filename="28-thumb.jpg" url="28-big.jpg" target="_parent"
+	title="Villa Tao"
+	description="" />
+
+	<thumbnail filename="wp_4-thumb.jpg" url="seccion_3_Suite_03.jpg" target="_parent"
+	title="Prueba 4"
+	description="Prueba 4" />
+
+</thumbnails>

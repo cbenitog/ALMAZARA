@@ -1,0 +1,62 @@
+/****************************************************
+// PureEdit.
+// ==================================================
+// URL: http://www.pureedit.com.
+// Copyright (c): 2007 Michael Dick.
+// ==================================================
+// File: dashboard.css
+****************************************************/
+
+
+/* =Dahsboard.
+---------------------------------------------------*/
+
+div#dashboardLeft
+{
+	width: 50%;
+	float: left;
+}
+
+div#dashboardRight
+{
+	width: 49%;
+	margin-bottom: 10px;
+	float: right;
+}
+
+div#upToDate
+{
+	background-color: #fff;
+	margin: 0 0 10px;
+	text-align: center;
+	padding: 20px;
+	border-top: 1px solid #bcd0a0;
+	border-left: 1px solid #bcd0a0;
+	border-bottom: 1px solid #86976e;
+	border-right: 1px solid #86976e;	
+}
+
+div#dashboard ul
+{
+	list-style: none;
+}
+
+	div#dashboard ul li a
+	{
+		padding: 0 18px 0 0;
+		background: url(../images/uploads_center.gif) no-repeat right;
+	}
+	
+	div#dashboard ul li a:hover
+	{
+		background: #f3f0b8 url(../images/uploads_center.gif) no-repeat right;
+	}	
+	
+	div#dashboard ul li em
+	{
+		margin: 10px 0 15px;
+		display: block;
+		line-height: 121%;
+		color: #565656;
+		font-style: normal;
+	}	

@@ -1,0 +1,65 @@
+/****************************************************
+// PureEdit.
+// ==================================================
+// URL: http://www.pureedit.com.
+// Copyright (c): 2007 Michael Dick.
+// ==================================================
+// File: auth.css
+****************************************************/
+
+
+/* =Login form area & Redirect page.
+---------------------------------------------------*/
+
+body#auth
+{
+	color: #969696;
+	font-size: 11px;
+	background-image: none;
+}
+
+	body#auth a { color: #969696; }
+	body#auth a:hover { color: #fff; }
+
+	body#auth form#shake,
+	body#auth div#redirect
+	{
+		width: 350px;
+		padding: 30px;
+		margin: 100px auto 0;
+	 		
+		border: 3px solid #393939;		
+		background-color: #4c4c4c;
+	}
+	
+		body#auth form input
+		{
+			width: 94%;		
+			padding: 6px;
+			margin: 6px 0 13px;
+			
+			font-size: 16px;
+			font-weight: bold;
+			border: 2px solid #343434;			
+		}
+		
+		body#auth form button
+		{
+			margin: 10px 0 0;
+		}
+		
+		body#auth div#forgetPassword
+		{
+            padding: 30px; 
+    		width: 352px;
+    		margin: 0 auto 0;            
+            color: #aaa; 
+            font-size: 12px; 
+            background-color: #5c5c5c; 
+            border: 2px solid #434343;
+		}		
+		
+		body#auth form#reset input#email
+		{
+            //margin: 15px 0 0;
+		}			

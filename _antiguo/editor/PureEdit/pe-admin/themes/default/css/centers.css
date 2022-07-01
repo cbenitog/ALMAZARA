@@ -1,0 +1,61 @@
+/****************************************************
+// PureEdit.
+// ==================================================
+// URL: http://www.pureedit.com.
+// Copyright (c): 2007 Michael Dick.
+// ==================================================
+// File: global.css
+****************************************************/
+
+
+/* =Centers (global styles).
+---------------------------------------------------*/
+
+div#sectors_center,
+div#help_center,
+div#accounts_center
+{
+ 	clear: both;
+	margin: 0 auto 25px;
+	padding: 10px;
+	border: none;
+	background-color: #d1eab2;
+}
+
+
+/* =Accounts Center.
+-----------------------------------------------*/				
+	
+div#accounts_center input
+{
+	width: 90%;
+	color: #333;
+	font-family: "Trebuchet MS";	
+	font-size: 11px;
+}
+
+
+
+/* =Sectors Center.
+-----------------------------------------------*/	
+
+div#sectors_center dl dt
+{
+	font-size: 11px;
+	float: left;
+	padding: 7px 0 0;
+	margin: 0 10px 0 0;
+}
+
+div#sectors_center dl dd
+{
+	float: left;
+	margin: 0 30px 0 0;
+}
+
+	div#sectors_center dl dd input
+	{
+		font-size: 12px;
+		padding: 5px;
+		width: 250px;
+	}

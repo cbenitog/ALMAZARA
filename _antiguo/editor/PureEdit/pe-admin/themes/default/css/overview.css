@@ -1,0 +1,28 @@
+/****************************************************
+// PureEdit.
+// ==================================================
+// URL: http://www.pureedit.com.
+// Copyright (c): 2007 Michael Dick.
+// ==================================================
+// File: overview.css
+****************************************************/
+
+table td a
+{
+	display: inline-block
+}
+
+/* =Warning.
+---------------------------------------------------*/
+div.fieldWarning h2
+{
+	font-weight: normal;
+ 	color: #879577;
+ 	border-left: 1px solid #edffd8;
+	border-top: 1px solid #edffd8;	
+ 	border-bottom: 1px solid #b2c996;
+	border-right: 1px solid #b2c996;
+	background-color: #e1fcc0;
+	padding: 10px 10px 11px;	
+	margin-bottom: 10px;
+}
