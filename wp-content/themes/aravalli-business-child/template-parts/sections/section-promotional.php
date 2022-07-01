@@ -23,13 +23,13 @@
 						<?php endif; ?>	
 						<div class="inner-text">
 							<?php if(!empty($title) || !empty($subtitle)): ?>
-								<h3><?php echo esc_html($title); ?><span><?php echo esc_html($subtitle); ?></span></h3>
+								<h3><?php echo esc_html($title); ?></h3><h3><span><?php echo esc_html($subtitle); ?></span></h3>
 							<?php endif; ?>		
 							
 							<?php if(!empty($text)): ?>	
 								<p><?php echo esc_html($text); ?></p>
 							<?php endif; ?>	
-							
+							<br><br><br>
 							<?php if(!empty($button)): ?>	
 								<a href="<?php echo esc_url($link); ?>" class="btn-promo"><?php echo esc_html($button); ?></a>
 							<?php endif; ?>
@@ -38,5 +38,6 @@
 				</div>
 			<?php } } ?>
 		</div>
+		* Ofertas aplicables a cualquiera de estas habitaciones: Habitación Doble, Villa Metro / Granito, Villa Rústica / Azul, Villa Zen / Tao
 	</div>
 </section>
